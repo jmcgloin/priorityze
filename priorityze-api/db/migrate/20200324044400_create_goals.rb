@@ -6,6 +6,7 @@ class CreateGoals < ActiveRecord::Migration[6.0]
       t.boolean :completed
       t.belongs_to :user, null: false, foreign_key: true
       t.timestamp :deadline
+      t.string :icon
 
       t.timestamps
     end
