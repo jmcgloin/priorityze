@@ -1,6 +1,6 @@
 class GoalController < ApplicationController
 
-		before_action :set_goal, only: [:show, :edit, :update, :destroy]
+		before_action :set_goal, only: [:update, :destroy]
 		
 		def index
 			goals = Goal.all
@@ -36,7 +36,7 @@ class GoalController < ApplicationController
 		private
 	
 		def goal_params
-			params.require(:goal).permit(:title, :deadline, :importance, :icon)
+			params.require(:goal).permit(:title, :deadline, :importance, :icon, :user_id)
 		end
 	
 		def set_goal
