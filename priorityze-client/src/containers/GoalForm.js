@@ -4,10 +4,13 @@ export default class GoalForm extends Component {
 	state = ({
 		goal: this.props.goal
 	})
+	handleCancel = () => {
+		this.props.handleCancel()
+	}
 	render() {
 		const { title, deadline, importance, icon } = this.state.goal
 		return (
-			<form className="flex flex-column" onSubmit={ this.handleSubmit } >
+			<form className="flex flex-column flex-around" onSubmit={ this.handleSubmit } >
 				<input
 					type="text"
 					value={ title }
@@ -40,7 +43,10 @@ export default class GoalForm extends Component {
 					placeholder={ icon || "Choose an icon" /*how to do this one? dialog? dropdown?*/ }
 					onChange={ this.handleChange }
 				/>
-				<button type="submit">Update</button>
+				<div className="buttons flex flex-row flex-around">
+					<button type="submit">Update</button>
+					<button type="button" onClick={ this.handleCancel } >Cancel</button>
+				</div>
 			</form>
 		)
 	}

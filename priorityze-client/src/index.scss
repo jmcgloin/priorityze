@@ -6,6 +6,36 @@
 	height: 98vh;
 }
 
+.goal-card {
+	width: 110px;
+	border: 1px solid black;
+	border-radius: 20px;
+	height: 110px;
+	padding: .5rem;
+	p {
+		width: 90%;
+		word-wrap: auto;
+		font-size: 1rem;
+		margin: auto;
+	}
+	input {
+		width: 90%;
+		border: none;
+		border-bottom: 1px solid red;
+	}
+	.buttons > button {
+		height: 1rem;
+		line-height: .7rem;
+		width: 40%;
+		text-align: center;
+		font-size: .7rem;
+		padding: 0;
+	}
+	form > input {
+		color: #777;
+	}
+}
+
 header, footer {
 	height: 10vh;
 	display: flex;
@@ -31,35 +61,10 @@ textarea {
 	border-radius: 10px;
 }
 
-input {
-	border-radius: 10px;
-}
+// input {
+// 	border-radius: 10px;
+// }
 
-.website-container {
-	flex-grow: 1;
-	height: 80vh;
-	width: 100%;
-}
-
-.admin-sidebar {
-	width: 20vw;
-	min-width: 120px;
-	border: 3px solid #555;
-	border-radius: 10px;
-	padding: 1rem;
-	max-height: 80vh;
-}
-
-.component-dialog {
-	border: 2px solid #888;
-	border-radius: 10px;
-	padding: 0.5rem;
-	height: auto;
-	min-height: 80px;
-	max-height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
 
 .flex {
 	display: flex;
