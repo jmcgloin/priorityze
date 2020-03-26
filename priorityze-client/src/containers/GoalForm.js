@@ -18,6 +18,11 @@ export default class GoalForm extends Component {
 			}
 		})
 	}
+	handleSubmit = (event) => {
+		event.preventDefault()
+		this.props.handleSubmit(this.state.goal)
+		this.props.handleCancel()
+	}
 	render() {
 		const { title, deadline, importance, icon } = this.state.goal
 		return (

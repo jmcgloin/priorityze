@@ -12,7 +12,24 @@ export default class GoalList extends Component {
 		)
 	}
 	renderGoalCards = () => {
-		console.log(this.props.goals)
-		return this.props.goals.map(goal => <GoalCard goal={ goal } key={goal.id} />)
+		const goalsArray = this.props.goals.map(goal => {
+			console.log(goal)
+			return (
+				<GoalCard 
+					goal={ goal }
+					key={goal.id}
+					formSubmit={ this.props.editGoal }
+					deleteGoal={ this.props.deleteGoal }
+				/>
+			)
+		})
+		const addGoalCard = <GoalCard
+				goal={{ title: "+" }}
+				key="addCard"
+				id="addCard"
+				formSubmit={ this.props.addGoal }
+				deleteGoal={ this.props.deleteGoal }
+			/>
+		return goalsArray.concat(addGoalCard)
 	}
 }

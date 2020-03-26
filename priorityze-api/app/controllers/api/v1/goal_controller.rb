@@ -19,10 +19,12 @@ class Api::V1::GoalController < ApplicationController
 		end
 	
 		def update
-			if goal.update(goal_params)
+			binding.pry
+			goal = Goal.find_by(id: params["id"])
+			if goal&.update(goal_params)
 				render json: { message: "success" }
 			else
-				render json: { errors: goal.errors }
+				render json: { errors: goal&.errors }
 			end
 		end
 	
@@ -37,7 +39,7 @@ class Api::V1::GoalController < ApplicationController
 		private
 	
 		def goal_params
-			params.require(:goal).permit(:title, :deadline, :importance, :icon, :user_id)
+			params.require(:goal).permit(:title, :deadline, :importance, :icon, :user_id, :completed, :updated_at)
 		end
 	
 		def set_goal
