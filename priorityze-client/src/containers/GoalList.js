@@ -1,6 +1,6 @@
 import  React, {Component} from 'react';
 
-import GoalCard from '../containers/GoalCard';
+import GoalCard from './GoalCard';
 
 export default class GoalList extends Component {
 
@@ -12,8 +12,7 @@ export default class GoalList extends Component {
 		)
 	}
 	renderGoalCards = () => {
+		console.log(this.props.goals)
 		return this.props.goals.map(goal => <GoalCard goal={ goal } key={goal.id} />)
 	}
 }
-
-// export default connect()(GoalList)

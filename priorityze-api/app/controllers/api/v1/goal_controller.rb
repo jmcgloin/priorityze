@@ -1,16 +1,17 @@
-class GoalController < ApplicationController
+class Api::V1::GoalController < ApplicationController
 
 		before_action :set_goal, only: [:update, :destroy]
 		
 		def index
 			goals = Goal.all
-			render json: goals, include: :step
+			puts(goals)
+			render json: goals, include: :steps
 		end
 
 		def create
 			goal = Goal.new(goal_params)
 			if goal.save
-				render json: goal
+				render json: goal, include: :steps
 			else
 				render json: { errors: goal.errors }
 			end

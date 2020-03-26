@@ -2,10 +2,21 @@ import  React, {Component} from 'react';
 
 export default class GoalForm extends Component {
 	state = ({
-		goal: this.props.goal
+		goal: {
+			...this.props.goal,
+			icon: ""
+		}
 	})
 	handleCancel = () => {
 		this.props.handleCancel()
+	}
+	handleChange = ({ target }) => {
+		this.setState({
+			goal: {
+				...this.state.goal,
+				[target.name]: target.value
+			}
+		})
 	}
 	render() {
 		const { title, deadline, importance, icon } = this.state.goal

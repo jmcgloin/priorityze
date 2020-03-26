@@ -1,15 +1,16 @@
 const goal = (state = { goals: [], loading: false }, action) => {
 	switch(action.type) {
 		case "ADD_GOALS":
+			console.log("action.goals", action.goals)
 			return {
 				goals: action.goals,
 				loading: false
 			}
-			case "GOALS_LOADING":
-				return {
-					goals: state.goals,
-					loading: true
-				}
+		case "GOALS_LOADING":
+			return {
+				goals: state.goals,
+				loading: true
+			}
 		case "ADD_GOAL":
 			return {
 				goals: [...state.goals, action.goal],

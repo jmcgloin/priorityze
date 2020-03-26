@@ -1,11 +1,12 @@
 export const fetchGoals = () => {
 	return dispatch => {
 		dispatch(goalsLoading())
-		console.log("fetching...")
 		try {
-			fetch("http://localhost:3001/api/v1/goals")
+			fetch("http://localhost:3001/api/v1/goal")
 			.then(r => r.json())
-			.then(rj => dispatch(addGoals(rj.goals)))
+			.then(rj => {
+				return dispatch(addGoals(rj))
+			})
 			.catch(err => {
 				console.log("From then.catch: ", err)
 				return { error: err}
@@ -18,7 +19,7 @@ export const fetchGoals = () => {
 	}
 }
 
-const addGoals = (goals) => ({ type: "LIST_GOALS", goals })
+const addGoals = (goals) => ({ type: "ADD_GOALS", goals })
 
 const goalsLoading = () => ({ type: "GOALS_LOADING", loading: true })
 
