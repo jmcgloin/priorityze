@@ -18,3 +18,8 @@ THEN:
 1. styling/animations
 2. icons/avatars
 3. d&d behavior
+
+
+
+Questions:
+switching uncontrolled to controlled error wrt deadline input in goalform

@@ -26,6 +26,7 @@ export default class GoalForm extends Component {
 	}
 	render() {
 		const { title, deadline, importance, icon } = this.state.goal
+		console.log(`${title} has form type: ${this.props.formType}`)
 		return (
 			<form className="flex flex-column flex-around" onSubmit={ this.handleSubmit } >
 				<input
@@ -38,7 +39,7 @@ export default class GoalForm extends Component {
 				/>
 				<input
 					type="text"
-					value={ this.state.goal.deadline }
+					value={ deadline }
 					name="deadline"
 					id="goal-form-deadline"
 					placeholder={ deadline || "Add deadline" }
@@ -61,9 +62,9 @@ export default class GoalForm extends Component {
 					onChange={ this.handleChange }
 				/>
 				<div className="buttons flex flex-row flex-around">
-					<button type="submit">Update</button>
+					<button type="submit">{ this.props.formType === "editGoal" ? "Update" : "Add" }</button>
 					<button type="button" onClick={ this.props.handleCancel } >Cancel</button>
-					<button type="button" onClick={ this.props.handleDelete } >Delete</button>
+					{ this.props.formType === "editGoal" && (<button type="button" onClick={ this.props.handleDelete } >Delete</button>)}
 				</div>
 			</form>
 		)

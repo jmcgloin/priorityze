@@ -1,7 +1,7 @@
 import  React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import GoalList from '../containers/GoalList';
+import GoalList from '../components/GoalList';
 import { fetchGoals, editGoal, addGoal, deleteGoal } from '../actions/goal';
 
 

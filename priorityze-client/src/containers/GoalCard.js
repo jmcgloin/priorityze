@@ -28,6 +28,7 @@ class GoalCard extends Component {
 						goal={ this.props.id === "addCard" ? newGoal : this.props.goal }
 						handleCancel={ this.handleCancelEdit }
 						handleDelete={ this.handleDeleteGoal }
+						formType={ this.props.id === "addCard" ? "addGoal" : "editGoal" }
 					/> : <p>{ this.props.goal.title }</p>
 				}
 			</div>
