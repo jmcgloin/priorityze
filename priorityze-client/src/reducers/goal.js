@@ -11,17 +11,17 @@ const goal = (state = { goals: [], loading: false }, action) => {
 				goals: state.goals,
 				loading: true
 			}
-		case "ADD_GOAL":
+		case "UPDATE_ADDED_GOAL":
 			return {
 				goals: [...state.goals, action.goal],
 				loading: false
 			}
-		case "DELETE_GOAL":
+		case "REMOVE_DELETED_GOAL":
 			return {
 				goals: [...state.goals].filter(goal => goal.id !== action.goalId),
 				loading: false
 			}
-		case "EDIT_GOAL":
+		case "UPDATE_EDITED_GOAL":
 			return {
 				goals: [...state.goals].map(goal => goal.id === action.goal.id ? action.goal : goal),
 				loading: false

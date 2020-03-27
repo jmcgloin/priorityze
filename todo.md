@@ -1,9 +1,13 @@
 NEXT:
 
+1. build Card component
+2. build StepList component
+3. build Step component
+4. wire up addStep, editStep, markStepCompleted
 
-
-3. wire up addGoal, editGoal, deleteGoal
 4. repeat for steps
+	--- first need to build the Card, StepList and Step components
+	--- 
 
 AFTER:
 

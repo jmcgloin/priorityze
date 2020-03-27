@@ -1,34 +1,31 @@
 class Api::V1::GoalController < ApplicationController
 
-		before_action :set_goal, only: [:update, :destroy]
-		
 		def index
 			goals = Goal.all
-			puts(goals)
 			render json: goals, include: :steps
 		end
 
 		def create
 			goal = Goal.new(goal_params)
 			if goal.save
-				render json: goal, include: :steps
+				render json: { goal: goal, ok: true}, include: :steps
 			else
-				render json: { errors: goal.errors }
+				render json: { errors: goal&.errors, ok: false }
 			end
 			
 		end
 	
 		def update
-			binding.pry
 			goal = Goal.find_by(id: params["id"])
 			if goal&.update(goal_params)
-				render json: { message: "success" }
+				render json: { goal: goal, ok: true }, include: :steps
 			else
-				render json: { errors: goal&.errors }
+				render json: { errors: goal&.errors, ok: false }
 			end
 		end
 	
 		def destroy
+			goal = Goal.find_by(id: params["id"])
 			if goal.destroy
 				render json: { message: "success" }
 			else
@@ -40,10 +37,6 @@ class Api::V1::GoalController < ApplicationController
 	
 		def goal_params
 			params.require(:goal).permit(:title, :deadline, :importance, :icon, :user_id, :completed, :updated_at)
-		end
-	
-		def set_goal
-			goal = Goal.find_by_id(params[:id])
 		end
 	
 end

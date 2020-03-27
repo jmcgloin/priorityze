@@ -4,6 +4,7 @@ export default class GoalForm extends Component {
 	state = ({
 		goal: {
 			...this.props.goal,
+			user_id: 1, // update this once a current user is identifiable
 			icon: ""
 		}
 	})
@@ -37,7 +38,7 @@ export default class GoalForm extends Component {
 				/>
 				<input
 					type="text"
-					value={ deadline }
+					value={ this.state.goal.deadline }
 					name="deadline"
 					id="goal-form-deadline"
 					placeholder={ deadline || "Add deadline" }
@@ -61,7 +62,8 @@ export default class GoalForm extends Component {
 				/>
 				<div className="buttons flex flex-row flex-around">
 					<button type="submit">Update</button>
-					<button type="button" onClick={ this.handleCancel } >Cancel</button>
+					<button type="button" onClick={ this.props.handleCancel } >Cancel</button>
+					<button type="button" onClick={ this.props.handleDelete } >Delete</button>
 				</div>
 			</form>
 		)

@@ -2,7 +2,7 @@ import  React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 import GoalList from '../containers/GoalList';
-import { fetchGoals, sendGoal, deleteGoal } from '../actions/goal';
+import { fetchGoals, editGoal, addGoal, deleteGoal } from '../actions/goal';
 
 
 class User extends Component {
@@ -13,12 +13,6 @@ class User extends Component {
 	componentDidMount() {
 		this.props.fetchGoals()
 	}
-	// editGoal = (goal) => {
-	// 	this.props.sendGoal(goal)
-	// }
-	// addGoal = (goal) => {
-	// 	this.props.sendGoal(goal)
-	// }
 	deleteGoal = (goalId) => {
 		this.props.deleteGoal(goalId)
 	}
@@ -28,8 +22,8 @@ class User extends Component {
 			goals
 				<GoalList
 					goals={ this.props.goals }
-					editGoal={ (goal, verb = "PATCH") => this.props.sendGoal(goal, verb) }
-					addGoal={ (goal, verb = "PUT") => this.props.sendGoal(goal, verb) }
+					editGoal={ this.props.editGoal }
+					addGoal={ this.props.addGoal }
 					deleteGoal={ this.props.deleteGoal }
 				/>
 			</div>
@@ -45,8 +39,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		fetchGoals: () => dispatch(fetchGoals()),
-		sendGoal: (goal, verb) => dispatch(sendGoal(goal, verb)),
-		deleteGoal: (goalId) => dispatch(deleteGoal(goalId))
+		editGoal: (goal, verb) => dispatch(editGoal(goal, verb)),
+		deleteGoal: (goalId) => dispatch(deleteGoal(goalId)),
+		addGoal: (goal) => dispatch(addGoal(goal))
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(User)

@@ -7,38 +7,88 @@ export const fetchGoals = () => {
 			.then(rj => dispatch(addGoals(rj)))
 			.catch(err => {
 				console.log("From then.catch: ", err)
-				return { error: err}
+				return dispatch(statusMessage(err.message, "failure"))
 			})
 		}
 		catch(err) {
 			console.log("try-catch error: ", err)
-			return err // update these to return error messages
+			return dispatch(statusMessage(err.message, "failure"))
 		}
 	}
 }
 
-export const sendGoal = (goal, verb) => {
-	console.log("goal action verb: ", verb)
+export const addGoal = (goal) => {
 	return dispatch => {
-		verb === "POST" ? dispatch(addGoal(goal)) : dispatch(editGoal(goal))
 		try {
-			fetch("http://localhost:3001/api/v1/goal", {
-				method: verb,
+			fetch(`http://localhost:3001/api/v1/goal`, {
+				method: "POST",
 		    headers: {
 		      'Content-Type': 'application/json'
 		    },
 		    body: JSON.stringify(goal)
 			})
 			.then(r => r.json())
-			.then(rj => dispatch(statusMessage(rj.message)))
+			.then(rj => {
+				if(rj.ok) {
+					return dispatch(updateAddedGoal(rj.goal))
+				}
+				const msgType = rj.ok ? "success" : "failure"
+				return dispatch(statusMessage(rj.message, msgType))
+			})
 			.catch(err => {
 				console.log("From post goal then.catch: ", err)
-				return { error: err }
+				return dispatch(statusMessage(err.message, "failure"))
 			})
 		}
 		catch(err) {
-			console.log("post try-catch error: ", err)
-			return err
+			return dispatch(statusMessage(err, "failure"))
+		}
+	}
+}
+
+export const editGoal = (goal) => {
+	return dispatch => {
+		try {
+			fetch(`http://localhost:3001/api/v1/goal/${goal.id}`, {
+				method: "PATCH",
+		    headers: {
+		      'Content-Type': 'application/json'
+		    },
+		    body: JSON.stringify(goal)
+			})
+			.then(r => r.json())
+			.then(rj => {
+				if(rj.ok) {
+					return dispatch(updateEditedGoal(rj.goal))
+				}
+				const msgType = rj.ok ? "success" : "failure"
+				return dispatch(statusMessage(rj.message, msgType))
+			})
+			.catch(err => {
+				console.log("From post goal then.catch: ", err)
+				return dispatch(statusMessage(err.message, "failure"))
+			})
+		}
+		catch(err) {
+			return dispatch(statusMessage(err, "failure"))
+		}
+	}
+}
+
+export const deleteGoal = (goalId) => {
+	return dispatch => {
+		try {
+			fetch(`http://localhost:3001/api/v1/goal/${goalId}`, {
+				method: "DELETE",
+		    headers: {
+		      'Content-Type': 'application/json'
+		    }
+			})
+			.then(r => r.json)
+			.then(rj => dispatch(removeDeletedGoal(goalId)))
+		}
+		catch(err) {
+			return dispatch(statusMessage(err, "failure"))
 		}
 	}
 }
@@ -47,10 +97,10 @@ export const addGoals = (goals) => ({ type: "ADD_GOALS", goals })
 
 export const goalsLoading = () => ({ type: "GOALS_LOADING", loading: true })
 
-export const addGoal = (goal) => ({ type: "ADD_GOAL", goal })
+export const updateAddedGoal = (goal) => ({ type: "UPDATE_ADDED_GOAL", goal })
 
-export const deleteGoal = (goalId) => ({ type: "DELETE_GOAL", goalId })
+export const removeDeletedGoal = (goalId) => ({ type: "REMOVE_DELETED_GOAL", goalId })
 
-export const editGoal = (goal) => ({ type: "EDIT_GOAL", goal })
+export const updateEditedGoal = (goal) => ({ type: "UPDATE_EDITED_GOAL", goal })
 
-export const statusMessage = (msg) => ({ type: "STATUS_MESSAGE", msg })
+export const statusMessage = (msg, msgType) => ({ type: "STATUS_MESSAGE", msg, msgType })
