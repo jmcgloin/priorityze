@@ -5,11 +5,12 @@ import StepForm from './StepForm'
 
 export default class StepList extends Component {
 	state = ({
-		extended: false
+		extended: false,
+		editing: false
 	})
 	renderSteps = () => {
 		if(this.props.steps === undefined) return null;
-		if(!this.props.steps.length) return <StepForm />
+		if(!this.props.steps.length || this.state.editing === true) return <StepForm />
 		const steps = this.props.steps.sort((a,b) => {
 			let comp = 0
 			if(a.order < b.order) comp = 1;
@@ -18,13 +19,30 @@ export default class StepList extends Component {
 		})
 		return steps.map(step => {
 			return (
-				<Step step={ step } key={ step.id } />		
+				<Step
+					step={ step }
+					key={ step.id }
+					markCompleted={ (id) => this.markCompleted(id) }
+				/>		
 			)
 		})
+	}
+	markCompleted = (id) => {
+		//dispatch the action or maybe pass up to 
 	}
 	mouseOver = () => {
 		this.setState({
 			extended: !this.state.extended
+		})
+	}
+	showStepForm = () => {
+		this.setState({
+			editing: true
+		})
+	}
+	cancelEdit = () => {
+		this.setState({
+			editing: false
 		})
 	}
 	render() {
