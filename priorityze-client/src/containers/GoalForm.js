@@ -28,7 +28,7 @@ export default class GoalForm extends Component {
 		const { title, deadline, importance, icon } = this.state.goal
 		console.log(`${title} has form type: ${this.props.formType}`)
 		return (
-			<form className="flex flex-column flex-around" onSubmit={ this.handleSubmit } >
+			<form className="flex flex-column flex-around flex-center" onSubmit={ this.handleSubmit } >
 				<input
 					type="text"
 					value={ title }

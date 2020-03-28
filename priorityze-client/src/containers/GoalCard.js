@@ -23,7 +23,7 @@ class GoalCard extends Component {
 			<div className="flex flex-colum flex-around goal-card card" onClick={ this.handleOnClick } >
 				{ this.state.editing ? 
 					<GoalForm
-						className="flex flex-colum"
+						
 						handleSubmit={ (goal) => this.props.formSubmit(goal) }
 						goal={ this.props.id === "addCard" ? newGoal : this.props.goal }
 						handleCancel={ this.handleCancelEdit }

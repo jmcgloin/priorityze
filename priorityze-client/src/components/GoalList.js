@@ -1,13 +1,13 @@
 import React from 'react';
 
-import GoalCard from '../containers/GoalCard'
+import Card from '../containers/Card'
 
 const GoalList = (props) => {
-	const renderGoalCards = () => {
+	const renderCards = () => {
 		const goalsArray = props.goals.map(goal => {
 			console.log(goal)
 			return (
-				<GoalCard 
+				<Card 
 					goal={ goal }
 					key={goal.id}
 					formSubmit={ props.editGoal }
@@ -15,18 +15,18 @@ const GoalList = (props) => {
 				/>
 			)
 		})
-		const addGoalCard = <GoalCard
+		const addCard = <Card
 				goal={{ title: "+" }}
 				key="addCard"
 				id="addCard"
 				formSubmit={ props.addGoal }
 				deleteGoal={ props.deleteGoal }
 			/>
-		return goalsArray.concat(addGoalCard)
+		return goalsArray.concat(addCard)
 	}
 	return (
 		<div className="flex flex-row flex-start flex-wrap">
-				{ renderGoalCards() }
+				{ renderCards() }
 		</div>
 	)
 }

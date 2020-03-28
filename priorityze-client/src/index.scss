@@ -6,27 +6,41 @@
 	height: 98vh;
 }
 
-.goal-card {
-	width: 110px;
+.card {
+	margin: 5px 5px 0 0;
 	border: 1px solid black;
 	border-radius: 20px;
-	height: 110px;
 	padding: .5rem;
+	.menu-extend {
+		margin: 10px 0 10px 5px;
+		padding-left: 2px;
+	}
+}
+
+.goal-card {
+	min-width: 80px;
+	min-height: 80px;
+	// width: 10vw;
+	height: 10vw;
+	border: 1px solid black;
+	border-radius: 20px;
+	margin: auto;
+	// padding: .5rem;
 	p {
-		width: 90%;
+		width: 10vw;
 		word-wrap: auto;
 		font-size: 1rem;
 		margin: auto;
 	}
 	input {
-		width: 90%;
+		// width: 90%;
 		border: none;
 		border-bottom: 1px solid red;
 	}
 	.buttons > button {
 		height: 1rem;
 		line-height: .7rem;
-		width: 40%;
+		// width: 40%;
 		text-align: center;
 		font-size: .7rem;
 		padding: 0;
@@ -34,6 +48,10 @@
 	form > input {
 		color: #777;
 	}
+}
+
+.step {
+
 }
 
 header, footer {
