@@ -16,6 +16,19 @@
 .menu-extend {
 	margin: 10px 0 10px 5px;
 	padding-left: 2px;
+	cursor: pointer;
+}
+
+.step-list {
+	p {
+		margin: 1px 1px 0 1px;
+	}
+	span {
+		margin-right: 4px;
+	}
+	input {
+		vertical-align: middle;
+	}
 }
 
 .goal-card {

@@ -35,10 +35,10 @@ export default class Step extends Component {
 			/>
 		)
 		const stepMetric = (
-			<span onClick={ this.editStep } >
-				{ this.props.step.metric }
+			<p>
+				<span onClick={ this.editStep } >{ this.props.step.metric }</span>
 				<input type="checkbox" checked={ this.state.completed } />
-			</span>
+			</p>
 		)
 		return this.state.editing ? editStep : stepMetric
 	}

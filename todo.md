@@ -5,8 +5,6 @@ NEXT:
 1c. write step actions and reducers to allow add step, edit step, mark step complete (edit step)
 1d. write goal actions and reducers to allow mark goal complete (edit goal) when all steps are completed
 
-6. Add sort capabilities for goals based on deadline, --importance--, --recent--
-
 AFTER:
 
 1. work on user login/signup/auth

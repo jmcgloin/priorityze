@@ -35,6 +35,11 @@ export default class StepList extends Component {
 			extended: !this.state.extended
 		})
 	}
+	clickMenu = () => {
+		this.setState({
+			extended: !this.state.extended
+		})
+	}
 	showStepForm = () => {
 		this.setState({
 			editing: true
@@ -49,47 +54,19 @@ export default class StepList extends Component {
 		return (
 			<div
 				className="flex flex-row flex-start"
-				onMouseEnter={ this.mouseOver }
-				onMouseLeave={ this.mouseOver}
 			>
-				<div className={ this.state.extended ? "flex flex-column" : "hidden" } >
+				<div className={ this.state.extended ? "flex flex-column step-list" : "hidden" } >
 					{ this.renderSteps() }
 				</div>
-				<div className="menu-extend flex flex-column flex-center">
+				<div
+					className="menu-extend flex flex-column flex-center"
+					onClick={ this.clickMenu }
+				>
 					{ this.state.extended ? "<" : ">" }
 				</div>
 			</div>
 		)
 	}
 }
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-
-// import Step from '../containers/Step';
-
-// const StepList = (props) => {
-		// const renderSteps = () => {
-		// 	const steps = props.steps.sort((a,b) => {
-		// 		let comp = 0
-		// 		if(a.order < b.order) comp = 1;
-		// 		if(a.order > b.order) comp = -1;
-		// 		return comp
-		// 	})
-		// 	return steps.map(step => <Step step={ step } />)
-		// }
-// 	return (
-// 		<div className="flex flex-row flex-start">
-// 			renderSteps()
-// 		</div>
-// 	)
-// }
-
-// export default StepList
+				{/* onMouseEnter={ this.mouseOver } */}
+				{/* onMouseLeave={ this.mouseOver} */}
