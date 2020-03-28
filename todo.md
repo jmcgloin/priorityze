@@ -1,8 +1,8 @@
 NEXT:
 
 1. build Card component
-	--- fix the ratios on the responsivenes so cards stay aligned
-	--- fix plus showing for title on addCard
+
+	
   --- once StepList is completed wire it up
   
 2. build StepList component
@@ -16,6 +16,8 @@ NEXT:
 4. repeat for steps
 	--- first need to build the Card, StepList and Step components
 	--- 
+
+5. Add sort capabilities for goals based on deadline, importance, alpha
 
 AFTER:
 

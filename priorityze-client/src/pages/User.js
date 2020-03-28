@@ -7,8 +7,7 @@ import { fetchGoals, editGoal, addGoal, deleteGoal } from '../actions/goal';
 
 class User extends Component {
 	state = {
-		test: true,
-		goals: []
+		sortMethod: "recent"
 	}
 	componentDidMount() {
 		this.props.fetchGoals()
@@ -16,15 +15,42 @@ class User extends Component {
 	deleteGoal = (goalId) => {
 		this.props.deleteGoal(goalId)
 	}
+	setSortMethod = ({target}) => {
+		this.setState({
+			sortMethod: target.value
+		})
+	}
+	renderButtons = () => {
+	}
 	render() {
+		
 		return (
 			<div className="flex flex-column flex-start">
-			goals
+				goals
+				<div className="buttons flex flex-row flex-start" >
+					<span>Sort By:</span>
+					<button
+						className="button rounded"
+						type="button"
+						onClick={ this.setSortMethod }
+						disabled={ this.state.sortMethod === "recent" }
+						value="recent"
+					>Most Recent</button>
+					<button
+						className="button rounded"
+						type="button"
+						onClick={ this.setSortMethod }
+						disabled={ this.state.sortMethod === "importance" }
+						value="importance"
+					>Most Importance</button>
+					
+				</div>
 				<GoalList
 					goals={ this.props.goals }
 					editGoal={ this.props.editGoal }
 					addGoal={ this.props.addGoal }
 					deleteGoal={ this.props.deleteGoal }
+					sortMethod={ this.state.sortMethod }
 				/>
 			</div>
 		)
@@ -39,7 +65,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		fetchGoals: () => dispatch(fetchGoals()),
-		editGoal: (goal, verb) => dispatch(editGoal(goal, verb)),
+		editGoal: (goal) => dispatch(editGoal(goal)),
 		deleteGoal: (goalId) => dispatch(deleteGoal(goalId)),
 		addGoal: (goal) => dispatch(addGoal(goal))
 	}

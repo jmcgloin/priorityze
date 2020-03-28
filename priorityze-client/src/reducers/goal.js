@@ -1,7 +1,6 @@
 const goal = (state = { goals: [], loading: false }, action) => {
 	switch(action.type) {
 		case "ADD_GOALS":
-			console.log("action.goals", action.goals)
 			return {
 				goals: action.goals,
 				loading: false
@@ -12,6 +11,7 @@ const goal = (state = { goals: [], loading: false }, action) => {
 				loading: true
 			}
 		case "UPDATE_ADDED_GOAL":
+		console.log("action goal", action.goal)
 			return {
 				goals: [...state.goals, action.goal],
 				loading: false

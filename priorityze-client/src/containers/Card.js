@@ -8,7 +8,7 @@ export default class Card extends Component {
 		extended: false
 	}
 	render() {
-		const { goal, key, formSubmit, deleteGoal, id } = this.props
+		const { goal, formSubmit, deleteGoal, id } = this.props
 		return (
 			<div className="flex flex-row card">
 				<GoalCard 

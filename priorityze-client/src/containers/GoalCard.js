@@ -17,7 +17,6 @@ class GoalCard extends Component {
 		this.props.deleteGoal(this.props.goal.id)
 	}
 	render() {
-		console.log("GoalCard goal id: ", this.props.goal.id)
 		const newGoal = { ...this.props.goal, title: "" }
 		return (
 			<div className="flex flex-colum flex-around goal-card card" onClick={ this.handleOnClick } >
