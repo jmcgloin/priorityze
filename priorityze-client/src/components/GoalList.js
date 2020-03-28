@@ -11,6 +11,7 @@ const GoalList = (props) => {
 					key={goal.id}
 					formSubmit={ props.editGoal }
 					deleteGoal={ props.deleteGoal }
+					addStep={ props.addStep }
 				/>
 			)
 		})

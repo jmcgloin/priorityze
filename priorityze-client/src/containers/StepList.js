@@ -10,7 +10,7 @@ export default class StepList extends Component {
 	})
 	renderSteps = () => {
 		if(this.props.steps === undefined) return null;
-		if(!this.props.steps.length || this.state.editing === true) return <StepForm />
+		// if(!this.props.steps.length || this.state.editing === true) return <StepForm />
 		const steps = this.props.steps.sort((a,b) => {
 			let comp = 0
 			if(a.order < b.order) comp = 1;
@@ -25,7 +25,7 @@ export default class StepList extends Component {
 					markCompleted={ (id) => this.markCompleted(id) }
 				/>		
 			)
-		}).concat([<StepForm key="addStep" />])
+		}).concat([<StepForm key="addStep" addStep={ (step) => this.props.addStep(step) } goalId={ this.props.goalId } />])
 		return (
 			<div className={ this.state.extended ? "flex flex-column step-list" : "hidden" } >
 				{ stepArray }
@@ -35,11 +35,11 @@ export default class StepList extends Component {
 	markCompleted = (id) => {
 		//dispatch the action or maybe pass up to 
 	}
-	mouseOver = () => {
-		this.setState({
-			extended: !this.state.extended
-		})
-	}
+	// mouseOver = () => {
+	// 	this.setState({
+	// 		extended: !this.state.extended
+	// 	})
+	// }
 	clickMenu = () => {
 		this.setState({
 			extended: !this.state.extended

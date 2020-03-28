@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 
 import GoalList from '../components/GoalList';
 import { fetchGoals, editGoal, addGoal, deleteGoal } from '../actions/goal';
+import { addStep, editStep } from '../actions/step';
 
 
 class User extends Component {
 	state = {
 		sortMethod: "recent"
 	}
-	componentDidMount() {
+	componentDidMount = () => {
 		this.props.fetchGoals()
 	}
 	deleteGoal = (goalId) => {
@@ -56,6 +57,7 @@ class User extends Component {
 					addGoal={ this.props.addGoal }
 					deleteGoal={ this.props.deleteGoal }
 					sortMethod={ this.state.sortMethod }
+					addStep={ this.props.addStep }
 				/>
 			</div>
 		)
@@ -72,7 +74,9 @@ const mapDispatchToProps = dispatch => {
 		fetchGoals: () => dispatch(fetchGoals()),
 		editGoal: (goal) => dispatch(editGoal(goal)),
 		deleteGoal: (goalId) => dispatch(deleteGoal(goalId)),
-		addGoal: (goal) => dispatch(addGoal(goal))
+		addGoal: (goal) => dispatch(addGoal(goal)),
+		addStep: (step) => dispatch(addStep(step)),
+		editStep: (step) => dispatch(editStep(step))
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(User)

@@ -2,24 +2,51 @@ import  React, {Component} from 'react';
 
 export default class StepForm extends Component {
 	state = ({
-		metric: ""
+		step: {
+			metric: "",
+			goalId: this.props.goalId
+		},
+		input: ""
 	})
 	handleDeleteStep = () => {
 		
 	}
 	addStep = (event) => {
 		event.preventDefault()
+		this.props.addStep(this.state.step)
+		this.state.input.blur();
 	}
 	changeMetric = ({ target }) => {
 		this.setState({
-			metric: target.value
+			step: {
+				...this.state.step,
+				metric: target.value
+			}
 		})
 	}
 	componentDidMount = () => {
 		const input = document.getElementById("newStep")
+		this.setState({ input })
 		input.addEventListener('blur', () => {
-			this.setState({ metric: "" })
+			this.setState({
+				step: {
+					...this.state.step,
+					metric: ""
+				}
+			})
 		})
+		input.addEventListener('keydown', ({ keyCode }) => {
+			if(keyCode === 27 ) {
+				input.blur()
+			}
+		})
+		// input.addEventListener('keypress', ({ key }) => {
+		// 	if(key === 'Enter') {
+		// 		this.addStep(this.state.metric)
+		// 		input.blur()
+		// 	}
+
+		// })
 	}
 	render() {
 		return (
@@ -28,7 +55,7 @@ export default class StepForm extends Component {
 						<input
 							type="text"
 							id="newStep"
-							value={ this.state.metric }
+							value={ this.state.step.metric }
 							onChange={ this.changeMetric }
 						/>
 					</label>

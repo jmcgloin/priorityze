@@ -11,8 +11,6 @@ export default class Step extends Component {
 		this.setState({
 			completed: !this.state.completed
 		})
-		// this needs to dipatch something to set the step completed in the db
-		// once all steps are completed the goal should be autmatically marked completed
 	}
 	editStep = ({ target }) => { //also need editing to keep extended true
 		this.setState({
