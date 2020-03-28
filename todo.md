@@ -19,3 +19,4 @@ THEN:
 
 Questions:
 switching uncontrolled to controlled error wrt deadline input in goalform
+How to get the layout to work with mouseover extend

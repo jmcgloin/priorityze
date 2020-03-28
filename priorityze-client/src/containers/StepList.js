@@ -17,7 +17,7 @@ export default class StepList extends Component {
 			if(a.order > b.order) comp = -1;
 			return comp
 		})
-		return steps.map(step => {
+		const stepArray = steps.map(step => {
 			return (
 				<Step
 					step={ step }
@@ -25,7 +25,12 @@ export default class StepList extends Component {
 					markCompleted={ (id) => this.markCompleted(id) }
 				/>		
 			)
-		})
+		}).concat([<StepForm key="addStep" />])
+		return (
+			<div className={ this.state.extended ? "flex flex-column step-list" : "hidden" } >
+				{ stepArray }
+			</div>
+		)
 	}
 	markCompleted = (id) => {
 		//dispatch the action or maybe pass up to 
@@ -55,9 +60,7 @@ export default class StepList extends Component {
 			<div
 				className="flex flex-row flex-start"
 			>
-				<div className={ this.state.extended ? "flex flex-column step-list" : "hidden" } >
-					{ this.renderSteps() }
-				</div>
+				{ this.state.extended && this.renderSteps() }
 				<div
 					className="menu-extend flex flex-column flex-center"
 					onClick={ this.clickMenu }
@@ -68,5 +71,5 @@ export default class StepList extends Component {
 		)
 	}
 }
-				{/* onMouseEnter={ this.mouseOver } */}
-				{/* onMouseLeave={ this.mouseOver} */}
+				//{/* onMouseEnter={ this.mouseOver } */}
+				//{/* onMouseLeave={ this.mouseOver} */}
