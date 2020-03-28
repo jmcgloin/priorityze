@@ -1,22 +1,11 @@
 NEXT:
 
 1a. build out StepForm
-1b. add "Add" button to step list for new step in StepList
-1c. step actions and reducers to allow for edit, new, mark compete (edit also)
-  
-2. build StepList component
-  
-  --- for addcard/cards, the new goal form should extend
-  --- for goalcards/cards without any steps, the new step form should extend
-  --- and add steps button should also be on the extention that shows the new step form onclick
+1b. show the form when no steps or when add step
+1c. write step actions and reducers to allow add step, edit step, mark step complete (edit step)
+1d. write goal actions and reducers to allow mark goal complete (edit goal) when all steps are completed
 
-4a. wire up addStep, editStep, markStepCompleted
-
-4b. repeat for steps
-	--- first need to build the --Card--, StepList and Step components
-	--- 
-
-5. Add sort capabilities for goals based on deadline, importance, alpha
+6. Add sort capabilities for goals based on deadline, --importance--, --recent--
 
 AFTER:
 

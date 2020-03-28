@@ -20,8 +20,6 @@ class User extends Component {
 			sortMethod: target.value
 		})
 	}
-	renderButtons = () => {
-	}
 	render() {
 		
 		return (
@@ -42,7 +40,14 @@ class User extends Component {
 						onClick={ this.setSortMethod }
 						disabled={ this.state.sortMethod === "importance" }
 						value="importance"
-					>Most Importance</button>
+					>Most Important</button>
+					<button
+						className="button rounded"
+						type="button"
+						onClick={ this.setSortMethod }
+						disabled={ this.state.sortMethod === "deadline" }
+						value="deadline"
+					>Due Soonest</button>
 					
 				</div>
 				<GoalList

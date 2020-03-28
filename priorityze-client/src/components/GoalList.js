@@ -29,6 +29,8 @@ const GoalList = (props) => {
 				return sortGoalsByRecent()
 			case "importance":
 				return sortGoalsByImportance()
+			case "deadline":
+				return sortGoalsByDeadline()
 			default:
 				return props.goals
 		}
@@ -46,6 +48,14 @@ const GoalList = (props) => {
 			let comp = 0;
 			if(a.importance < b.importance) comp = 1;
 			if(a.importance > b.importance) comp = -1;
+			return comp
+		})
+	}
+	const sortGoalsByDeadline = () => {
+		return [...props.goals].sort((a,b) => {
+			let comp = 0;
+			if(a.deadline > b.deadline) comp = 1;
+			if(a.deadline < b.deadline) comp = -1;
 			return comp
 		})
 	}
