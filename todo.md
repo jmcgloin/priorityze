@@ -10,11 +10,13 @@ NEXT:
   --- for addcard/cards, the new goal form should extend
   --- for goalcards/cards without any steps, the new step form should extend
   --- and add steps button should also be on the extention that shows the new step form onclick
-3. build Step component
-4. wire up addStep, editStep, markStepCompleted
 
-4. repeat for steps
-	--- first need to build the Card, StepList and Step components
+3. build Step component
+
+4a. wire up addStep, editStep, markStepCompleted
+
+4b. repeat for steps
+	--- first need to build the --Card--, StepList and Step components
 	--- 
 
 5. Add sort capabilities for goals based on deadline, importance, alpha
