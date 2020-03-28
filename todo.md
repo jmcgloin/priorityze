@@ -6,7 +6,7 @@ NEXT:
   --- once StepList is completed wire it up
   
 2. build StepList component
-  --- steplist (for goalcard/card) should be retracted until moused/clicked, then extended
+  
   --- for addcard/cards, the new goal form should extend
   --- for goalcards/cards without any steps, the new step form should extend
   --- and add steps button should also be on the extention that shows the new step form onclick

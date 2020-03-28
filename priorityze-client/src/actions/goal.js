@@ -4,7 +4,9 @@ export const fetchGoals = () => {
 		try {
 			fetch("http://localhost:3001/api/v1/goal")
 			.then(r => r.json())
-			.then(rj => dispatch(addGoals(rj)))
+			.then(rj => {
+				dispatch(addGoals(rj))
+			})
 			.catch(err => {
 				console.log("From then.catch: ", err)
 				return dispatch(statusMessage(err.message, "failure"))

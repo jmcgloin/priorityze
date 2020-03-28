@@ -11,10 +11,11 @@
 	border: 1px solid black;
 	border-radius: 20px;
 	padding: .5rem;
-	.menu-extend {
-		margin: 10px 0 10px 5px;
-		padding-left: 2px;
-	}
+}
+
+.menu-extend {
+	margin: 10px 0 10px 5px;
+	padding-left: 2px;
 }
 
 .goal-card {
@@ -156,4 +157,8 @@ textarea {
 	margin: 12px 5px;
 	width: 20vh;
 	border-radius: 50%;
+}
+
+.hidden {
+	display: none;
 }

@@ -29,6 +29,8 @@ const GoalList = (props) => {
 				return sortGoalsByRecent()
 			case "importance":
 				return sortGoalsByImportance()
+			default:
+				return props.goals
 		}
 	}
 	const sortGoalsByRecent = () => {

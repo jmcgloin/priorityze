@@ -1,12 +1,9 @@
 import  React, {Component} from 'react';
 
 import GoalCard from './GoalCard';
-// import StepList from './StepList';
+import StepList from './StepList';
 
 export default class Card extends Component {
-	state = {
-		extended: false
-	}
 	render() {
 		const { goal, formSubmit, deleteGoal, id } = this.props
 		return (
@@ -17,10 +14,7 @@ export default class Card extends Component {
 					deleteGoal={ deleteGoal }
 					id={ id || goal.id }
 				/>
-				{ /* this.state.extended && <StepList /> */ }
-				<div className="menu-extend flex-vcenter flex">
-					{ this.state.extended ? "<" : ">" }
-				</div>
+				{ id ? null : <StepList steps={ goal.steps } /> }
 			</div>
 		)
 	}
