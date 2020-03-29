@@ -11,7 +11,7 @@ export default class StepList extends Component {
 	renderSteps = () => {
 		if(this.props.steps === undefined) return null;
 		// if(!this.props.steps.length || this.state.editing === true) return <StepForm />
-		const steps = this.props.steps.sort((a,b) => {
+		const steps = this.props.steps.sort((a,b) => { //add order as column to step table so this will work
 			let comp = 0
 			if(a.order < b.order) comp = 1;
 			if(a.order > b.order) comp = -1;
@@ -22,10 +22,18 @@ export default class StepList extends Component {
 				<Step
 					step={ step }
 					key={ step.id }
-					markCompleted={ (id) => this.markCompleted(id) }
+					goalId={ this.props.goalId }
+					editStep={ this.props.editStep }
+					deleteStep={ this.props.deleteStep }
 				/>		
 			)
-		}).concat([<StepForm key="addStep" addStep={ (step) => this.props.addStep(step) } goalId={ this.props.goalId } />])
+		}).concat([
+			<StepForm
+				key="addStep"
+				addStep={ (step) => this.props.addStep(step) }
+				goalId={ this.props.goalId }
+			/>
+		])
 		return (
 			<div className={ this.state.extended ? "flex flex-column step-list" : "hidden" } >
 				{ stepArray }

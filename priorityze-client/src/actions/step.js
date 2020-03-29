@@ -1,4 +1,4 @@
-import { updateEditedGoal, statusMessage } from './goal'
+import { statusMessage, editGoal } from './goal'
 
 export const addStep = (step) => {
 	return dispatch => {
@@ -18,7 +18,13 @@ export const addStep = (step) => {
 			.then(r => r.json())
 			.then(rj => {
 				if(rj.ok) {
-					return dispatch(updateEditedGoal(rj.goal))
+					let goalCompleted = true
+					rj.goal.steps.forEach(step => !step.completed && (goalCompleted = false))
+					const goal = {
+						...rj.goal,
+						completed: goalCompleted
+					}
+					return dispatch(editGoal(goal))
 				}
 				const msgType = rj.ok ? "success" : "failure"
 				return dispatch(statusMessage(rj.message, msgType))
@@ -35,6 +41,7 @@ export const addStep = (step) => {
 }
 
 export const editStep = (step) => {
+	console.log("Action, edit step: ", step)
 	return dispatch => {
 		try {
 			fetch(`http://localhost:3001/api/v1/step/${step.id}`, {
@@ -42,12 +49,59 @@ export const editStep = (step) => {
 		    headers: {
 		      'Content-Type': 'application/json'
 		    },
-		    body: JSON.stringify(step)
+		    body: JSON.stringify({
+		    	id: step.id,
+		    	step: {
+		    		metric: step.metric,
+		    		goal_id: step.goalId,
+		    		completed: step.completed
+		    	}
+		    })
+			})
+			.then(r => r.json())
+			.then(rj => {
+				if(rj.ok) { // check to see if all steps are now completed, if so, mark goal completed
+					let goalCompleted = true
+					rj.goal.steps.forEach(step => !step.completed && (goalCompleted = false))
+					const goal = {
+						...rj.goal,
+						completed: goalCompleted
+					}
+					return dispatch(editGoal(goal))
+				}
+				const msgType = rj.ok ? "success" : "failure"
+				return dispatch(statusMessage(rj.message, msgType))
+			})
+			.catch(err => {
+				console.log("From post step then.catch: ", err)
+				return dispatch(statusMessage(err.message, "failure"))
+			})
+		}
+		catch(err) {
+			return dispatch(statusMessage(err, "failure"))
+		}
+	}
+}
+
+export const deleteStep = (stepId) => {
+	return dispatch => {
+		try {
+			fetch(`http://localhost:3001/api/v1/step/${stepId}`, {
+				method: "DELETE",
+		    headers: {
+		      'Content-Type': 'application/json'
+		    }
 			})
 			.then(r => r.json())
 			.then(rj => {
 				if(rj.ok) {
-					return dispatch(updateEditedGoal(rj.goal))
+					let goalCompleted = true
+					rj.goal.steps.forEach(step => !step.completed && (goalCompleted = false))
+					const goal = {
+						...rj.goal,
+						completed: goalCompleted
+					}
+					return dispatch(editGoal(goal))
 				}
 				const msgType = rj.ok ? "success" : "failure"
 				return dispatch(statusMessage(rj.message, msgType))
