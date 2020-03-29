@@ -12,7 +12,6 @@ export default class Step extends Component {
 		input: null
 	}
 	markCompleted = ({ target }) => {
-		console.log("Step, markCompleted: ", target.checked)
 		this.setState({
 			step: {
 				...this.state.step,
@@ -28,13 +27,10 @@ export default class Step extends Component {
 		})
 	}
 	updateStep = () => {
-		// this.editStep()
-		console.log("Step updateStep: ", this.state.step)
 		this.props.editStep(this.state.step)
 		this.setState({ editing: false })
 	}
 	renderStep = () => {
-		console.log("Step, step: ", this.props.step)
 		const editStep = (
 			<input 
 				id="editInput"
@@ -64,7 +60,6 @@ export default class Step extends Component {
 	componentDidUpdate = () => {
 		const input = document.getElementById("editInput")
 		if(input && this.state.input !== input) {
-			console.log(input)
 			this.setState({ input })
 			input.focus()
 			input.addEventListener("blur", () => this.setState({ editing: false }))

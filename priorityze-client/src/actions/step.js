@@ -41,7 +41,6 @@ export const addStep = (step) => {
 }
 
 export const editStep = (step) => {
-	console.log("Action, edit step: ", step)
 	return dispatch => {
 		try {
 			fetch(`http://localhost:3001/api/v1/step/${step.id}`, {
@@ -116,7 +115,3 @@ export const deleteStep = (stepId) => {
 		}
 	}
 }
-
-
-// /api/v1/step(.:format)                                                                   api/v1/step#create
-//                           api_v1_step PATCH  /api/v1/step/:id

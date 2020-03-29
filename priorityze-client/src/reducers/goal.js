@@ -11,7 +11,6 @@ const goal = (state = { goals: [], loading: false }, action) => {
 				loading: true
 			}
 		case "UPDATE_ADDED_GOAL":
-		console.log("action goal", action.goal)
 			return {
 				goals: [...state.goals, action.goal],
 				loading: false
