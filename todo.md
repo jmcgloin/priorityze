@@ -2,24 +2,6 @@ NEXT:
 
 AFTER:
 
-1. work on user login/signup/auth
- -- build the client side login and sign up pages
- -- write the actions and reducers to handle the fetches to the api for login and sign up
- -- figure out how to accept the token and where to hold it and how to submit it in the fetches
-
-signup
-body: {
-	user: {
-		username,
- 		email,
- 		password
- 	}
-}
-headers: {
-	"Accept": "application/json",
-	"Content-Type": "application/json"
-}
-
 THEN:
 
 1. styling/animations
@@ -30,5 +12,6 @@ THEN:
 
 
 Questions:
+how to take care of protected pages wrt auth i.e. existence of token or currentuser
 switching uncontrolled to controlled error wrt deadline input in goalform
 How to get the layout to work with mouseover extend

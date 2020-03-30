@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Card from '../containers/Card'
+import Card from './Card'
 
 const GoalList = (props) => {
 	const renderCards = () => {

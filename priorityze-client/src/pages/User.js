@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import GoalList from '../components/GoalList';
 import { fetchGoals, editGoal, addGoal, deleteGoal } from '../actions/goal';
 import { addStep, editStep, deleteStep } from '../actions/step';
+import { getCurrentUser } from '../actions/user';
 
 
 class User extends Component {
@@ -11,7 +12,10 @@ class User extends Component {
 		sortMethod: "recent"
 	}
 	componentDidMount = () => {
-		this.props.fetchGoals()
+		console.log("user, token: ", this.props.user.token)
+		// this.props.getCurrentUser(this.props.user.token)
+		console.log("user, currentuser: ", this.props.user)
+		this.props.fetchGoals() // also get the current user here e.g. name and other info
 	}
 	deleteGoal = (goalId) => {
 		this.props.deleteGoal(goalId)
@@ -68,7 +72,8 @@ class User extends Component {
 
 const mapStateToProps = state => {
 	return {
-		goals: state.goal.goals
+		goals: state.goal.goals,
+		user: state.user
 	}
 }
 const mapDispatchToProps = dispatch => {
@@ -79,7 +84,8 @@ const mapDispatchToProps = dispatch => {
 		addGoal: (goal) => dispatch(addGoal(goal)),
 		addStep: (step) => dispatch(addStep(step)),
 		editStep: (step) => dispatch(editStep(step)),
-		deleteStep: (stepId) => dispatch(deleteStep(stepId))
+		deleteStep: (stepId) => dispatch(deleteStep(stepId)),
+		getCurrentUser: (token) => dispatch(getCurrentUser(token))
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(User)

@@ -19,20 +19,21 @@ class SignupForm extends Component {
 				...this.state.user,
 				[target.name]: target.value
 			}
-		}, () => {console.log(this.state.user)})
+		})
 	}
 	signUp = (event) => {
 		event.preventDefault();
-		const { user } = this.state
-		console.log("submitting")
-		this.props.signUp({ user })
+		this.props.signUp({ user: this.state.user })
+	}
+	componentDidUpdate = () => {
+		if(this.props.user.token) this.props.history.push("/user")
 	}
 	render() {
 		const { username, email, password /*, passwordConfirmation} */ } = this.state.user
 		return (
 			<div className="flex flex-column flex-around">
-				<div>
-					warning messages go here
+				<div className="messages">
+					{this.props.message}
 				</div>
 				<form onSubmit={ this.signUp }>
 					<label>Username: <input
@@ -54,6 +55,7 @@ class SignupForm extends Component {
 						value={ password }
 						onChange={ this.onChange }
 						name="password"
+						required
 					/></label>
 					{/*<label>Confirm password: <input
 						className={ this.state.matching ? "matches" : null }
@@ -69,4 +71,4 @@ class SignupForm extends Component {
 	}
 }
 
-export default connect(null, { signUp })(SignupForm)
+export default connect(({ user }) => ({ user }), { signUp })(SignupForm)

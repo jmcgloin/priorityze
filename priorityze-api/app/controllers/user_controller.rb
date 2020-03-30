@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+	before_action :authenticate_user!
 	def show
 		user = User.find_by(email: user_params[:email])
 		render json: user

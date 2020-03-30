@@ -1,11 +1,13 @@
-export const fetchGoals = () => {
+export const fetchGoals = (token) => {
 	return dispatch => {
 		dispatch(goalsLoading())
 		try {
-			fetch("http://localhost:3001/api/v1/goal")
+			fetch("http://localhost:3001/api/v1/goal", {
+				headers: headers(token)
+			})
 			.then(r => r.json())
 			.then(rj => {
-				dispatch(addGoals(rj))
+				return dispatch(addGoals(rj))
 			})
 			.catch(err => {
 				console.log("From then.catch: ", err)
@@ -106,3 +108,12 @@ export const removeDeletedGoal = (goalId) => ({ type: "REMOVE_DELETED_GOAL", goa
 export const updateEditedGoal = (goal) => ({ type: "UPDATE_EDITED_GOAL", goal })
 
 export const statusMessage = (msg, msgType) => ({ type: "STATUS_MESSAGE", msg, msgType })
+
+const headers = (token = null) => {
+	const h = {
+    "Accept": "application/json",
+		"Content-Type": "application/json",
+		"Access-Control-Expose-Headers": "Authorization"
+	}
+	return token ? {...h, "Authorization": token} : h
+}

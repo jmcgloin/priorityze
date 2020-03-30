@@ -4,7 +4,7 @@ import SignupForm from '../containers/SignupForm'
 
 const Signup = (props) => {
 	return (
-		<SignupForm />
+		<SignupForm history={props.history} message={ props.message } />
 	)
 }
 

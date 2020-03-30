@@ -1,12 +1,11 @@
-import  React, {Component} from 'react';
+import React from 'react';
 
-export default class Login extends Component {
-	render() {
-		return (
-			<React.Fragment>
-				Login
-			</React.Fragment>
-		)
-	}
+import LoginForm from '../containers/LoginForm'
+
+const Login = (props) => {
+	return (
+		<LoginForm history={props.history} message={ props.message } />
+	)
 }
 
+export default Login
