@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 		    registrations: 'registrations'
 		}
 
+	resources :user, only: [:show, :index]
+
 	namespace :api do
 		namespace :v1 do
 			resources :goal, only: [:index, :create, :destroy, :update]

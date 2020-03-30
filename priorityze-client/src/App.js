@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import './App.css';
 import Login from './pages/Login';
@@ -11,10 +11,12 @@ import Welcome from './pages/Welcome';
 function App() {
   return (
   	<Router>
-  		<Route exact path="/"><Welcome /></Route>
-			<Route path="/login"><Login /></Route>
-			<Route path="/signup"><Signup /></Route>
-			<Route path="/user"><User /></Route>
+  		<Switch>
+	  		<Route exact path="/" component={Welcome} />
+				<Route path="/login" component={Login} />
+				<Route path="/signup" component={Signup} />
+				<Route path="/user" component={User} />
+			</Switch>
     </Router>
   );
 }

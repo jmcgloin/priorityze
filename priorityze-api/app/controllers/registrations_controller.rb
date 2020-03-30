@@ -4,9 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
 
 	def create
 		begin
-			binding.pry
 			super
-			binding.pry
 		rescue ActiveRecord::RecordInvalid => e
 			render_resource(e.record)
 		rescue ActiveRecord::RecordNotUnique => e

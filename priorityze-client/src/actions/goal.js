@@ -86,7 +86,7 @@ export const deleteGoal = (goalId) => {
 		      'Content-Type': 'application/json'
 		    }
 			})
-			.then(r => r.json)
+			.then(r => r.json())
 			.then(rj => dispatch(removeDeletedGoal(goalId)))
 		}
 		catch(err) {
