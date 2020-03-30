@@ -12,10 +12,8 @@ class User extends Component {
 		sortMethod: "recent"
 	}
 	componentDidMount = () => {
-		console.log("user, token: ", this.props.user.token)
-		// this.props.getCurrentUser(this.props.user.token)
-		console.log("user, currentuser: ", this.props.user)
-		this.props.fetchGoals() // also get the current user here e.g. name and other info
+		this.props.getCurrentUser(this.props.user.token)
+		this.props.fetchGoals(this.props.user.token) // also get the current user here e.g. name and other info
 	}
 	deleteGoal = (goalId) => {
 		this.props.deleteGoal(goalId)
@@ -78,7 +76,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
 	return {
-		fetchGoals: () => dispatch(fetchGoals()),
+		fetchGoals: (token) => dispatch(fetchGoals(token)),
 		editGoal: (goal) => dispatch(editGoal(goal)),
 		deleteGoal: (goalId) => dispatch(deleteGoal(goalId)),
 		addGoal: (goal) => dispatch(addGoal(goal)),

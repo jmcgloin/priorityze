@@ -5,7 +5,7 @@ class User < ApplicationRecord
 	devise :database_authenticatable, :registerable,
          :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
 
-	has_many :goals
+	has_many :goals, dependent: :destroy
 
 	validates :username, :email, presence: true
 	validates :username, :email, uniqueness: true

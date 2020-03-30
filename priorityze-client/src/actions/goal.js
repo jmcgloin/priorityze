@@ -110,10 +110,13 @@ export const updateEditedGoal = (goal) => ({ type: "UPDATE_EDITED_GOAL", goal })
 export const statusMessage = (msg, msgType) => ({ type: "STATUS_MESSAGE", msg, msgType })
 
 const headers = (token = null) => {
+	console.log("actions goals, headers, token: ", token)
 	const h = {
     "Accept": "application/json",
 		"Content-Type": "application/json",
 		"Access-Control-Expose-Headers": "Authorization"
 	}
-	return token ? {...h, "Authorization": token} : h
+	let header =  token ? {...h, "Authorization": token.token} : h
+	console.log("actions goals, headers, header: ", header)
+	return header
 }

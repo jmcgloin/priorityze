@@ -39,6 +39,7 @@ const GoalList = (props) => {
 		}
 	}
 	const sortGoalsByRecent = () => {
+		console.log("goallist, sortGoalsByRecent, props.goals", props.goals)
 		return [...props.goals].sort((a,b) => {
 			let comp = 0;
 			if(a.created_at < b.created_at) comp = 1;

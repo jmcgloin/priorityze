@@ -4,9 +4,14 @@ class Api::V1::GoalController < ApplicationController
 
 	def index
 		user = current_user
-		goals = Goal.all  #.find_by(user_id: user.id)
+		goals = Goal.find_by(user_id: user.id)
+		# goals = Goal.all
 		binding.pry
-		render json: goals, include: :steps
+		if goals
+			render json: goals, include: :steps
+		else
+			render json: { goals: {goals: [], steps: [] }}
+		end
 	end
 
 	def create
