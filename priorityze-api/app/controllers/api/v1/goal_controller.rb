@@ -6,11 +6,11 @@ class Api::V1::GoalController < ApplicationController
 		user = current_user
 		goals = Goal.find_by(user_id: user.id)
 		# goals = Goal.all
-		binding.pry
+		# binding.pry
 		if goals
 			render json: goals, include: :steps
 		else
-			render json: { goals: {goals: [], steps: [] }}
+			render json: []
 		end
 	end
 

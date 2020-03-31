@@ -9,20 +9,12 @@ const GoalList = (props) => {
 				<Card 
 					goal={ goal }
 					key={goal.id}
-					formSubmit={ props.editGoal }
-					deleteGoal={ props.deleteGoal }
-					addStep={ props.addStep }
-					editStep={ props.editStep }
-					deleteStep={ props.deleteStep }
 				/>
 			)
 		})
 		const addCard = <Card
 				goal={{ title: "+" }}
 				key="addCard"
-				id="addCard"
-				formSubmit={ props.addGoal }
-				deleteGoal={ props.deleteGoal }
 			/>
 		return goalsArray.concat(addCard)
 	}

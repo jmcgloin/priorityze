@@ -1,5 +1,8 @@
 NEXT:
 
+1. add links/buttons on welcome page
+2. work out protected routes/redirects when not auth
+
 AFTER:
 
 THEN:
@@ -8,8 +11,6 @@ THEN:
 2. icons/avatars
 3. d&d behavior
 4. "What should I do Next" functionality
-
-
 
 Questions:
 how to take care of protected pages wrt auth i.e. existence of token or currentuser

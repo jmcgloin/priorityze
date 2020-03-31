@@ -1,12 +1,12 @@
 class UserController < ApplicationController
 	before_action :authenticate_user!
 	def show
-		user = User.find_by(email: user_params[:email])
+		user = current_user
 		render json: user
 	end
 
 	def index
-		binding.pry
+		# binding.pry
 		render json: { user: current_user }
 	end
 

@@ -21,14 +21,12 @@ export const fetchGoals = (token) => {
 	}
 }
 
-export const addGoal = (goal) => {
+export const addGoal = (goal, token) => {
 	return dispatch => {
 		try {
 			fetch(`http://localhost:3001/api/v1/goal`, {
 				method: "POST",
-		    headers: {
-		      'Content-Type': 'application/json'
-		    },
+		    headers: headers(token),
 		    body: JSON.stringify(goal)
 			})
 			.then(r => r.json())
@@ -116,7 +114,5 @@ const headers = (token = null) => {
 		"Content-Type": "application/json",
 		"Access-Control-Expose-Headers": "Authorization"
 	}
-	let header =  token ? {...h, "Authorization": token.token} : h
-	console.log("actions goals, headers, header: ", header)
-	return header
+	return token ? {...h, "Authorization": token.token} : h
 }

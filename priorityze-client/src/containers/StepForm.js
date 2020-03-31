@@ -8,9 +8,6 @@ export default class StepForm extends Component {
 		},
 		input: ""
 	})
-	handleDeleteStep = () => {
-		
-	}
 	addStep = (event) => {
 		event.preventDefault()
 		this.props.addStep(this.state.step)
@@ -40,13 +37,6 @@ export default class StepForm extends Component {
 				input.blur()
 			}
 		})
-		// input.addEventListener('keypress', ({ key }) => {
-		// 	if(key === 'Enter') {
-		// 		this.addStep(this.state.metric)
-		// 		input.blur()
-		// 	}
-
-		// })
 	}
 	render() {
 		return (

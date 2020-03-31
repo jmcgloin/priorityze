@@ -2,6 +2,94 @@ import  React, {Component} from 'react';
 
 export default class Step extends Component {
 	state = {
+		step: this.props.step,
+		editing: false,
+		input: null
+	}
+	renderStep = () => {
+		const { metric, completed } = this.props.step
+		return (
+			<React.Fragment>
+				<p>{ metric }</p>
+				<input type="checkbox" checked={ completed } onChange={ this.markCompleted } />
+			</React.Fragment>
+		)
+	}
+	renderEdit = () => {
+		const { metric } = this.props.step
+		return (
+			<React.Fragment>
+				<input type="text" value={ metric } onChange={ this.editMetric } />
+				<button type="button inline-button" onClick={ this.editStep } >Save</button>
+				<button type="button inline-button" onClick={ this.deleteStep } >X</button>
+			</React.Fragment>
+		)
+	}
+	editMetric = ({ target }) => {
+		this.setState({
+			step: {
+				...this.state.step,
+				metric: target.value
+			}
+		})
+	}
+	editStep = () => this.props.editStep(this.state.step)
+
+	deleteStep = () => this.props.deleteStep(this.state.step.id)
+
+	markCompleted = ({ target }) => {
+		this.setState({
+			step: {
+				...this.state.step,
+				completed: target.checked
+			}
+		}, () => { this.editStep(this.state.step) })
+	}
+	render() {
+		return (
+			<div className="flex flex-row">
+				{ this.state.editing ? this.renderEdit() : this.renderStep() }
+			</div>
+		)
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import  React, {Component} from 'react';
+
+export default class Step extends Component {
+	state = {
 		editing: false,
 		step: {
 			metric: this.props.step.metric,
@@ -72,3 +160,4 @@ export default class Step extends Component {
 	}
 }
 
+*/

@@ -1,16 +1,13 @@
 import  React, {Component} from 'react';
+import { connect } from 'react-redux';
 
-export default class GoalForm extends Component {
+import { addGoal, editGoal, deleteGoal } from '../actions/goal';
+
+class GoalForm extends Component {
 	state = ({
-		goal: {
-			...this.props.goal,
-			user_id: 1, // update this once a current user is identifiable
-			icon: ""
-		}
+		goal: this.props.goal,
+		userId: this.props.userId
 	})
-	handleCancel = () => {
-		this.props.handleCancel()
-	}
 	handleChange = ({ target }) => {
 		this.setState({
 			goal: {
@@ -21,26 +18,25 @@ export default class GoalForm extends Component {
 	}
 	handleSubmit = (event) => {
 		event.preventDefault()
-		this.props.handleSubmit(this.state.goal)
+		const { goal } = this.state
+		goal.id ? editGoal(goal) : addGoal(goal)
 		this.props.handleCancel()
 	}
 	render() {
-		const { title, deadline, importance, icon } = this.state.goal
+		const { title, deadline, importance, icon, id } = this.state.goal
 		return (
 			<form className="flex flex-column flex-around flex-center" onSubmit={ this.handleSubmit } >
 				<input
 					type="text"
 					value={ title }
 					name="title"
-					id="goal-form-title"
 					placeholder={ title || "Add goal title" }
 					onChange={ this.handleChange }
 				/>
 				<input
-					type="text"
+					type="date"
 					value={ deadline }
 					name="deadline"
-					id="goal-form-deadline"
 					placeholder={ deadline || "Add deadline" }
 					onChange={ this.handleChange }
 				/>
@@ -48,7 +44,6 @@ export default class GoalForm extends Component {
 					type="text"
 					value={ importance }
 					name="importance"
-					id="goal-form-importance"
 					placeholder={ importance || "Importance: 1 - 10" /*this should be a dropdown*/ }
 					onChange={ this.handleChange }
 				/>
@@ -56,17 +51,25 @@ export default class GoalForm extends Component {
 					type="text"
 					value={ icon }
 					name="icon"
-					id="goal-form-icon"
 					placeholder={ icon || "Choose an icon" /*how to do this one? dialog? dropdown?*/ }
 					onChange={ this.handleChange }
 				/>
 				<div className="buttons flex flex-row flex-around">
-					<button type="submit">{ this.props.formType === "editGoal" ? "Update" : "Add" }</button>
+					<button type="submit">{ id ? "Update" : "Add" }</button>
 					<button type="button" onClick={ this.props.handleCancel } >Cancel</button>
-					{ this.props.formType === "editGoal" && (<button type="button" onClick={ this.props.handleDelete } >Delete</button>)}
+					{ id ? (<button type="button" onClick={ () => this.props.deleteGoal(id) } >Delete</button>) : null}
 				</div>
 			</form>
 		)
 	}
 }
 
+const mapDispatchToProps = dispatch => {
+	return {
+		addGoal: (goal) => dispatch(addGoal(goal)),
+		editGoal: (goal) => dispatch(editGoal(goal)),
+		deleteGoal: (goalId) => dispatch(deleteGoal(goalId))
+	}
+}
+
+export default connect(null, mapDispatchToProps)(GoalForm)

@@ -10,7 +10,8 @@ export const signUp = (user) => {
 			.then(r => {
 				const token = r.headers.get(["authorization"])
 				if(token) {
-					return dispatch(addSessionToken({ token }))
+					localStorage.setItem('priorityzeIdToken', token)
+					// return dispatch(addSessionToken({ token }))
 				} else {
 					console.log(r.message)
 					return dispatch(addCurrentuser({ user: null }))
@@ -37,8 +38,9 @@ export const getCurrentUser = (token) => {
 			})
 			.then(r => r.json())
 			.then(rj => {
-				console.log(rj.user)
-				return dispatch(addCurrentuser(rj.user))
+				console.log("actions user, getCurrentUser, rj: ", rj)
+				localStorage.setItem('priorityzeCurrentUser', rj.user)
+				// return dispatch(addCurrentuser(rj.user))
 			})
 			.catch(err => {
 				console.log("From then.catch: ", err)
@@ -63,7 +65,6 @@ export const logIn = (user) => {
 			})
 			.then(r => {
 				const token = r.headers.get(["authorization"])
-				console.log()
 				if(token) {
 					return dispatch(addSessionToken({ token }))
 				} else {
@@ -119,7 +120,7 @@ const headers = (token = null) => {
 		"Content-Type": "application/json",
 		"Access-Control-Expose-Headers": "Authorization"
 	}
-	return token ? {...h, "Authorization": token} : h
+	return token ? {...h, "Authorization": token.token} : h
 }
 
 const baseURL = "http://localhost:3001/"

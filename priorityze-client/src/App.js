@@ -12,7 +12,8 @@ import Header from './containers/Header';
 function App() {
   return (
   	<Router>
-  		<Header />
+  		<Route path="/" component={Header} />
+      {/*<Header />*/}
   		<Switch>
 	  		<Route exact path="/" component={Welcome} />
 				<Route path="/login" component={Login} />
