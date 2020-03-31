@@ -23,7 +23,6 @@ class LoginForm extends Component {
 		this.props.logIn({ user: this.state.user })
 	}
 	componentDidUpdate = () => {
-		console.log("signup form props: ", this.props)
 		if(this.props.user.token) this.props.history.push("/user")
 	}
 	render() {

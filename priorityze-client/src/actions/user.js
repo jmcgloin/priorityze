@@ -1,6 +1,5 @@
 export const signUp = (user) => {
 	return dispatch => {
-		// dispatch(addCurrentuser(user))
 		try {
 			fetch(`${baseURL}signup`, {
 				method: "POST",
@@ -11,7 +10,6 @@ export const signUp = (user) => {
 				const token = r.headers.get(["authorization"])
 				if(token) {
 					localStorage.setItem('priorityzeIdToken', token)
-					// return dispatch(addSessionToken({ token }))
 				} else {
 					console.log(r.message)
 					return dispatch(addCurrentuser({ user: null }))
@@ -40,7 +38,6 @@ export const getCurrentUser = (token) => {
 			.then(rj => {
 				console.log("actions user, getCurrentUser, rj: ", rj)
 				localStorage.setItem('priorityzeCurrentUser', rj.user)
-				// return dispatch(addCurrentuser(rj.user))
 			})
 			.catch(err => {
 				console.log("From then.catch: ", err)
@@ -66,7 +63,8 @@ export const logIn = (user) => {
 			.then(r => {
 				const token = r.headers.get(["authorization"])
 				if(token) {
-					return dispatch(addSessionToken({ token }))
+					localStorage.setItem('priorityzeIdToken', token)
+					console.log("localStorage token: ", localStorage.getItem('priorityzeIdToken'))
 				} else {
 					console.log(r.message)
 					return dispatch(addCurrentuser({ user: null }))
@@ -94,6 +92,8 @@ export const logOut = () => {
 			.then(r => r.json())
 			.then(rj => {
 				console.log("logged out: ", rj)
+				localStorage.removeItem('priorityzeIdToken')
+				localStorage.removeItem('priorityzeCurrentUser')
 				return dispatch(logoutUser())
 			})
 			.catch(err => {
