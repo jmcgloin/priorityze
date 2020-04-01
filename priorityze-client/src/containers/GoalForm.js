@@ -1,5 +1,8 @@
-import  React, {Component} from 'react';
+import  React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
+import Picker from 'emoji-picker-react';
+// import DatePicker from 'react-date-picker';
+// import moment from 'moment';
 
 import { addGoal, editGoal, deleteGoal } from '../actions/goal';
 
@@ -18,9 +21,17 @@ class GoalForm extends Component {
 			}
 		})
 	}
+	dateChange = (date) => {
+		console.log(date)
+		// this.setState({
+		// 	goal: {
+		// 		...this.state.goal,
+		// 		deadline: date
+		// 	}
+		// })
+	}
 	handleSubmit = (event) => {
 		event.preventDefault()
-		console.log("GoalForm handlesubmit")
 		const goal = {
 			...this.state.goal,
 			user_id: this.props.userId
@@ -28,8 +39,12 @@ class GoalForm extends Component {
 		goal.id ? this.props.editGoal(goal) : this.props.addGoal(goal)
 		this.props.handleCancel()
 	}
+	handleEmoji = (e) => {
+		console.log(e)
+	}
 	render() {
 		const { title, deadline, importance, icon, id } = this.state.goal
+		console.log("GoalForm, render, deadline: ", new Date(deadline))
 		return (
 			<form className="flex flex-column flex-around flex-center" onSubmit={ this.handleSubmit } >
 				<input
@@ -40,12 +55,15 @@ class GoalForm extends Component {
 					onChange={ this.handleChange }
 					required
 				/>
+				{/*<DatePicker
+              value={ deadline }
+              onChange={ this.dateChange }
+            />*/}
 				<input
 					type="date"
-					value={ deadline }
+					value={ new Date(deadline) }
 					name="deadline"
-					placeholder={ deadline || "Add deadline" }
-					onChange={ this.handleChange }
+					onChange={ (event) => this.handleChange(event) }
 					required
 				/>
 				<input
@@ -56,11 +74,12 @@ class GoalForm extends Component {
 					onChange={ this.handleChange }
 					required
 				/>
+				{/*<Picker onEmojiClick={ this.handleEmoji }/>*/}
 				<input
 					type="text"
 					value={ icon }
 					name="icon"
-					placeholder={ icon || "Choose an icon" /*how to do this one? dialog? dropdown?*/ }
+					placeholder={ icon || "Choose an icon" /*how to do this one? dialog? dropdown? */}
 					onChange={ this.handleChange }
 				/>
 				<div className="buttons flex flex-row flex-around">

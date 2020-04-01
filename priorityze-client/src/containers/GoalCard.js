@@ -18,15 +18,18 @@ export default class GoalCard extends Component {
 		const newGoal = { ...goal, title: "" }
 		return (
 			<div
-				className="flex flex-colum flex-around goal-card card"
-				id={ id ? `gc${this.props.id}` : "new-goal-card" }
+				className={
+					`flex flex-colum flex-around goal-card card ${goal.completed && !this.state.editing ? "completed" : null}`
+				}
+				id={ id ? `gc${id}` : "new-goal-card" }
 				onClick={ this.handleOnClick }
 			>
 				{ this.state.editing ? 
 					<GoalForm
 						goal={ id === "addCard" ? newGoal : goal }
+						id={ id }
 						handleCancel={ this.handleCancelEdit }
-					/> : <p>{ goal.title }{ goal.completed && " X" }</p>
+					/> : <p>{ goal.title }</p>
 				}
 			</div>
 		)

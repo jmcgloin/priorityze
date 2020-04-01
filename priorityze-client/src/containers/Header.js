@@ -9,11 +9,13 @@ class Header extends Component {
 	render() {
 		return (
 			<div className="flex flex-between flex-row">
-				<Link to="/">Home</Link> {/*how to change this based on page/component*/}
-				{ localStorage.getItem('priorityzeIdToken') ? 
-					<LogOutButton logOut={ this.props.logOut } history={this.props.history} /> :
-					null
-				}
+				<header className="flex flex-row flex-between">
+					<Link to="/">Home</Link> {/*how to change this based on page/component*/}
+					{ localStorage.getItem('priorityzeIdToken') ? 
+						<LogOutButton logOut={ this.props.logOut } history={this.props.history} /> :
+						null
+					}
+				</header>
 			</div>
 		)
 	}

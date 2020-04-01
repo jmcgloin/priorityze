@@ -9,14 +9,15 @@ export default class Step extends Component {
 	renderStep = () => {
 		const { metric, completed } = this.props.step
 		return (
-			<React.Fragment>
-					{ metric }
-					<input type="checkbox" checked={ completed } onChange={ this.markCompleted } />
-			</React.Fragment>
+			<span onClick={ () => this.setState({ ...this.state, editing: true }) }>
+				{ metric }
+				<input type="checkbox" checked={ completed } onChange={ this.markCompleted } />
+			</span>
+			
 		)
 	}
 	renderEdit = () => {
-		const { metric } = this.props.step
+		const { metric } = this.state.step
 		return (
 			<React.Fragment>
 				<input type="text" value={ metric } onChange={ this.editMetric } />
@@ -33,7 +34,13 @@ export default class Step extends Component {
 			}
 		})
 	}
-	editStep = () => this.props.editStep(this.state.step)
+	editStep = () => {
+		this.props.editStep(this.state.step)
+		this.setState({
+			...this.state,
+			editing: false
+		})
+	}
 
 	deleteStep = () => this.props.deleteStep(this.state.step.id)
 

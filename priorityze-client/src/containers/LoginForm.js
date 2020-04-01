@@ -1,5 +1,4 @@
 import  React, {Component} from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { logIn, responseError } from '../actions/user';
@@ -28,10 +27,13 @@ class LoginForm extends Component {
 				password: ""
 			}
 		})
-		this.props.history.push("/user")
+	}
+	componentDidMount = () => {
+		if(localStorage.getItem('priorityzeIdToken')) this.props.history.push("/user")
 	}
 	componentDidUpdate = () => {
-		// if(this.props.user.errorMessage) setTimeout(() => this.props.responseError(""), 3000)
+		if(localStorage.getItem('priorityzeIdToken')) this.props.history.push("/user")
+		if(this.props.user.errorMessage) setTimeout(() => this.props.responseError(""), 3000)
 	}
 	render() {
 		const { email, password } = this.state.user

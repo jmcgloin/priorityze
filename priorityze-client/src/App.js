@@ -12,16 +12,18 @@ import AuthRoute from './components/AuthRoute'
 
 function App() {
   return (
-  	<Router>
-  		<Route path="/" component={ Header } />
-  		<Switch>
-	  		<Route exact path="/" component={ Welcome } />
-				<Route path="/login" component={ Login } />
-				<Route path="/signup" component={ Signup } />
-        <AuthRoute path="/user" component={ User } />
-				
-			</Switch>
-    </Router>
+    <div className="main-content">
+    	<Router>
+    		<Route path="/" component={ Header } />
+    		<Switch>
+  	  		<Route exact path="/" component={ Welcome } />
+  				<Route path="/login" component={ Login } />
+  				<Route path="/signup" component={ Signup } />
+          <AuthRoute path="/user" component={ User } />
+          <Route component={() =>  "404 Not Found" } />
+  			</Switch>
+      </Router>
+    </div>
   );
 }
 

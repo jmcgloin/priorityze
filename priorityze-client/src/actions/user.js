@@ -41,11 +41,10 @@ export const logIn = (user) => {
 			.then(r => r.json().then(rj => ({ rj, r })))
 			.then(({ rj, r }) => {
 				dispatch(finishRequest())
-				console.log("actions, login, r", r)
-				console.log("actions, login, rj", rj.id)
 				if(!r.ok) return dispatch(responseError(rj.error));
 				localStorage.setItem('priorityzeIdToken', r.headers.get(["Authorization"]))
 				localStorage.setItem('priorityzeCurrentUserId', rj.id)
+				return dispatch(isAuthorized(true))
 			})
 			.catch(err => {
 				console.log("From then.catch: ", err)
@@ -94,8 +93,6 @@ const beginRequest = () => ({ type: "BEGIN_REQUEST" })
 const finishRequest = () => ({ type: "FINISH_REQUEST" })
 
 const isAuthorized = (authorized) => ({ type: "IS_AUTHORIZED", authorized })
-
-// const isVerified = (verified) => ({ type: "IS_VERIFIED", verified })
 
 const headers = (token = null) => {
 	const h = {

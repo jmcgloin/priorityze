@@ -45,9 +45,9 @@ export const editStep = (step) => {
 				method: "PATCH",
 		    headers: headers(),
 		    body: JSON.stringify({
-		    	id: step.id,
 		    	step: {
 		    		metric: step.metric,
+			    	id: step.id,
 		    		goal_id: step.goalId,
 		    		completed: step.completed
 		    	}

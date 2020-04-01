@@ -32,9 +32,11 @@
 		line-height: 5rem;
 		font-size: 5rem;
 	}
+	cursor: pointer;
 }
 
 .goal-card {
+	position: relative;
 	min-width: 80px;
 	min-height: 80px;
 	// width: 10vw;
@@ -66,7 +68,19 @@
 		color: #777;
 	}
 }
-
+.goal-card.completed {
+	height: 10vw;
+	width: inherit;
+	
+}
+.goal-card.completed::before {
+			content: '\2705';
+			color: green;
+			font-size: 5em;
+			position: absolute;
+			height: inherit;
+			width: inherit;
+		}
 .step {
 	input {
 		margin-left: 5px;
@@ -118,6 +132,10 @@ textarea {
 
 .flex-around {
 	justify-content: space-around;
+}
+
+.flex-between {
+	justify-content: space-between;
 }
 
 .flex-center {

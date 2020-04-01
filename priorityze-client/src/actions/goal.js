@@ -91,11 +91,9 @@ export const deleteGoal = (goalId) => {
 			})
 			.then(r => r.json())
 			.then(rj => {
-				if(rj.ok) {
-					dispatch(removeDeletedGoal(goalId))
-				} else {
-					//handle error/redirect here
-				}
+				console.log("actions, goal, deleteGoal, rj", rj)
+					console.log("actions, goal, deleteGoal, rj.ok")
+					return dispatch(removeDeletedGoal(goalId))
 			})
 		}
 		catch(err) {
