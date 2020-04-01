@@ -10,10 +10,10 @@ const Card = ({ goal }) => {
 				goal={ goal }
 				id={ goal.id || null }
 			/>
-			{ goal.id ? null : <StepList
+			{ goal.id ? <StepList
 				steps={ goal.steps }
 				goalId={ goal.id }
-				/>
+				/> : null
 			}
 		</div>
 	)

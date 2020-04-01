@@ -1,13 +1,12 @@
 class UserController < ApplicationController
 	before_action :authenticate_user!
 	def show
-		user = current_user
-		render json: user
+		render json: { user: current_user, ok: true }
 	end
 
 	def index
 		# binding.pry
-		render json: { user: current_user }
+		render json: { user: current_user, ok: true }
 	end
 
 	private

@@ -1,9 +1,9 @@
-export const fetchGoals = (token) => {
+export const fetchGoals = () => {
 	return dispatch => {
 		dispatch(goalsLoading())
 		try {
 			fetch("http://localhost:3001/api/v1/goal", {
-				headers: headers(token)
+				headers: headers()
 			})
 			.then(r => r.json())
 			.then(rj => {
@@ -21,21 +21,28 @@ export const fetchGoals = (token) => {
 	}
 }
 
-export const addGoal = (goal, token) => {
+export const addGoal = (goal) => {
+	const user_id = localStorage.getItem('priorityzeCurrentUserId')
+	const fullGoal = {
+		...goal,
+		user_id
+	}
+	console.log("action, goal, addGoal, fullGoal: ", fullGoal)
 	return dispatch => {
 		try {
 			fetch(`http://localhost:3001/api/v1/goal`, {
 				method: "POST",
-		    headers: headers(token),
-		    body: JSON.stringify(goal)
+		    headers: headers(),
+		    body: JSON.stringify(fullGoal)
 			})
 			.then(r => r.json())
 			.then(rj => {
+					console.log("actions, goal, addGoal, rj: ", rj)
 				if(rj.ok) {
 					return dispatch(updateAddedGoal(rj.goal))
+				} else {
+					//handle error/redirect here
 				}
-				const msgType = rj.ok ? "success" : "failure"
-				return dispatch(statusMessage(rj.message, msgType))
 			})
 			.catch(err => {
 				console.log("From post goal then.catch: ", err)
@@ -53,18 +60,16 @@ export const editGoal = (goal) => {
 		try {
 			fetch(`http://localhost:3001/api/v1/goal/${goal.id}`, {
 				method: "PATCH",
-		    headers: {
-		      'Content-Type': 'application/json'
-		    },
+		    headers: headers(),
 		    body: JSON.stringify(goal)
 			})
 			.then(r => r.json())
 			.then(rj => {
 				if(rj.ok) {
 					return dispatch(updateEditedGoal(rj.goal))
+				} else {
+					//handle error/redirect here
 				}
-				const msgType = rj.ok ? "success" : "failure"
-				return dispatch(statusMessage(rj.message, msgType))
 			})
 			.catch(err => {
 				console.log("From post goal then.catch: ", err)
@@ -82,12 +87,16 @@ export const deleteGoal = (goalId) => {
 		try {
 			fetch(`http://localhost:3001/api/v1/goal/${goalId}`, {
 				method: "DELETE",
-		    headers: {
-		      'Content-Type': 'application/json'
-		    }
+		    headers: headers()
 			})
 			.then(r => r.json())
-			.then(rj => dispatch(removeDeletedGoal(goalId)))
+			.then(rj => {
+				if(rj.ok) {
+					dispatch(removeDeletedGoal(goalId))
+				} else {
+					//handle error/redirect here
+				}
+			})
 		}
 		catch(err) {
 			return dispatch(statusMessage(err, "failure"))
@@ -107,12 +116,12 @@ export const updateEditedGoal = (goal) => ({ type: "UPDATE_EDITED_GOAL", goal })
 
 export const statusMessage = (msg, msgType) => ({ type: "STATUS_MESSAGE", msg, msgType })
 
-const headers = (token = null) => {
-	console.log("actions goals, headers, token: ", token)
+const headers = () => {
 	const h = {
     "Accept": "application/json",
 		"Content-Type": "application/json",
 		"Access-Control-Expose-Headers": "Authorization"
 	}
-	return token ? {...h, "Authorization": token.token} : h
+	const token = localStorage.getItem('priorityzeIdToken')
+	return token ? { ...h, "Authorization": token } : h
 }

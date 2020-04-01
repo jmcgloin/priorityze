@@ -20,14 +20,17 @@
 }
 
 .step-list {
-	p {
-		margin: 1px 1px 0 1px;
-	}
+
 	span {
 		margin-right: 4px;
 	}
-	input {
-		vertical-align: middle;
+}
+
+#new-goal-card {
+	p {
+		text-align: center;
+		line-height: 5rem;
+		font-size: 5rem;
 	}
 }
 
@@ -65,7 +68,10 @@
 }
 
 .step {
-
+	input {
+		margin-left: 5px;
+	}
+	margin-bottom: 3px;
 }
 
 header, footer {

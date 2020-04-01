@@ -1,9 +1,9 @@
 import  React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import GoalList from '../components/GoalList';
-import { getCurrentUser } from '../actions/user';
-import { fetchGoals } from '../actions/goal'
+import { fetchGoals } from '../actions/goal';
 
 
 class User extends Component {
@@ -11,15 +11,14 @@ class User extends Component {
 		sortMethod: "recent"
 	}
 	componentDidMount = () => {
-		this.props.getCurrentUser(this.props.user.token)
-		this.props.fetchGoals(this.props.user.token)
+		if(localStorage.getItem('priorityzeIdToken')) this.props.fetchGoals();
 	}
 	setSortMethod = ({ target }) => {
 		this.setState({
 			sortMethod: target.value
 		})
 	}
-	render() {
+	renderUser = () => {
 		return (
 			<div className="flex flex-column flex-start">
 				<div className="buttons flex flex-row flex-start" >
@@ -53,18 +52,24 @@ class User extends Component {
 			</div>
 		)
 	}
+	render() {
+		return (
+			<div>
+				{ localStorage.getItem('priorityzeIdToken') ? this.renderUser() : <Redirect to="/login" /> }
+			</div>
+		)
+	}
 }
 
 const mapStateToProps = state => {
 	return {
 		goals: state.goal.goals,
-		user: state.user
+		authorized: state.user.authorized
 	}
 }
 const mapDispatchToProps = dispatch => {
 	return {
-		fetchGoals: (token) => dispatch(fetchGoals(token)),
-		getCurrentUser: (token) => dispatch(getCurrentUser(token))
+		fetchGoals: () => dispatch(fetchGoals())
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(User)

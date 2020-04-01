@@ -10,8 +10,8 @@ export default class Step extends Component {
 		const { metric, completed } = this.props.step
 		return (
 			<React.Fragment>
-				<p>{ metric }</p>
-				<input type="checkbox" checked={ completed } onChange={ this.markCompleted } />
+					{ metric }
+					<input type="checkbox" checked={ completed } onChange={ this.markCompleted } />
 			</React.Fragment>
 		)
 	}
@@ -47,7 +47,7 @@ export default class Step extends Component {
 	}
 	render() {
 		return (
-			<div className="flex flex-row">
+			<div className="flex flex-row step flex-vcenter">
 				{ this.state.editing ? this.renderEdit() : this.renderStep() }
 			</div>
 		)

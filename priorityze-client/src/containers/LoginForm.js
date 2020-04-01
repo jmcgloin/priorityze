@@ -1,7 +1,8 @@
 import  React, {Component} from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { logIn } from '../actions/user';
+import { logIn, responseError } from '../actions/user';
 
 class LoginForm extends Component {
 	state = ({
@@ -21,16 +22,24 @@ class LoginForm extends Component {
 	logIn = (event) => {
 		event.preventDefault();
 		this.props.logIn({ user: this.state.user })
+		this.setState({
+			user: {
+				email: "",
+				password: ""
+			}
+		})
+		this.props.history.push("/user")
 	}
 	componentDidUpdate = () => {
-		if(this.props.user.token) this.props.history.push("/user")
+		// if(this.props.user.errorMessage) setTimeout(() => this.props.responseError(""), 3000)
 	}
 	render() {
 		const { email, password } = this.state.user
+		const { errorMessage } = this.props.user
 		return (
 			<div className="flex flex-column flex-around">
 				<div className="messages">
-					{this.props.message}
+					 {errorMessage}
 				</div>
 				<form onSubmit={ this.logIn }>
 					<label>Email: <input
@@ -50,8 +59,9 @@ class LoginForm extends Component {
 					<button type="submit">Log In!</button>
 				</form>
 			</div>
+			
 		)
 	}
 }
 
-export default connect(({ user }) => ({ user }), { logIn })(LoginForm)
+export default connect(({ user }) => ({ user }), { logIn, responseError })(LoginForm)

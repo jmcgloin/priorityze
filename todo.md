@@ -1,7 +1,9 @@
 NEXT:
 
-1. add links/buttons on welcome page
-2. work out protected routes/redirects when not auth
+2. on welcome, login and signup pages, check for  token and current user in local storage and,
+		if they exist, redirect to user page
+3. disallow access to user page if no token in localStorage
+4. add messages when not ok responses from api
 
 AFTER:
 
@@ -13,6 +15,5 @@ THEN:
 4. "What should I do Next" functionality
 
 Questions:
-how to take care of protected pages wrt auth i.e. existence of token or currentuser
 switching uncontrolled to controlled error wrt deadline input in goalform
 How to get the layout to work with mouseover extend

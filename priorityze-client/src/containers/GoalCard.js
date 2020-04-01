@@ -14,14 +14,19 @@ export default class GoalCard extends Component {
 		this.setState({ editing: false })
 	}
 	render() {
-		const newGoal = { ...this.props.goal, title: "" }
+		const { id, goal } = this.props
+		const newGoal = { ...goal, title: "" }
 		return (
-			<div className="flex flex-colum flex-around goal-card card" onClick={ this.handleOnClick } >
+			<div
+				className="flex flex-colum flex-around goal-card card"
+				id={ id ? `gc${this.props.id}` : "new-goal-card" }
+				onClick={ this.handleOnClick }
+			>
 				{ this.state.editing ? 
 					<GoalForm
-						goal={ this.props.id === "addCard" ? newGoal : this.props.goal }
+						goal={ id === "addCard" ? newGoal : goal }
 						handleCancel={ this.handleCancelEdit }
-					/> : <p>{ this.props.goal.title }{ this.props.goal.completed && " X" }</p>
+					/> : <p>{ goal.title }{ goal.completed && " X" }</p>
 				}
 			</div>
 		)

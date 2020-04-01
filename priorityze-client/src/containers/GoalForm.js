@@ -5,8 +5,10 @@ import { addGoal, editGoal, deleteGoal } from '../actions/goal';
 
 class GoalForm extends Component {
 	state = ({
-		goal: this.props.goal,
-		userId: this.props.userId
+		goal: {
+			...this.props.goal,
+			title: this.props.id ? this.props.goal.title : ""
+		}
 	})
 	handleChange = ({ target }) => {
 		this.setState({
@@ -18,8 +20,12 @@ class GoalForm extends Component {
 	}
 	handleSubmit = (event) => {
 		event.preventDefault()
-		const { goal } = this.state
-		goal.id ? editGoal(goal) : addGoal(goal)
+		console.log("GoalForm handlesubmit")
+		const goal = {
+			...this.state.goal,
+			user_id: this.props.userId
+		}
+		goal.id ? this.props.editGoal(goal) : this.props.addGoal(goal)
 		this.props.handleCancel()
 	}
 	render() {
@@ -32,6 +38,7 @@ class GoalForm extends Component {
 					name="title"
 					placeholder={ title || "Add goal title" }
 					onChange={ this.handleChange }
+					required
 				/>
 				<input
 					type="date"
@@ -39,6 +46,7 @@ class GoalForm extends Component {
 					name="deadline"
 					placeholder={ deadline || "Add deadline" }
 					onChange={ this.handleChange }
+					required
 				/>
 				<input
 					type="text"
@@ -46,6 +54,7 @@ class GoalForm extends Component {
 					name="importance"
 					placeholder={ importance || "Importance: 1 - 10" /*this should be a dropdown*/ }
 					onChange={ this.handleChange }
+					required
 				/>
 				<input
 					type="text"

@@ -4,7 +4,7 @@ class Api::V1::GoalController < ApplicationController
 
 	def index
 		user = current_user
-		goals = Goal.find_by(user_id: user.id)
+		goals = user.goals
 		# goals = Goal.all
 		# binding.pry
 		if goals

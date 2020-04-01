@@ -5,9 +5,7 @@ export const addStep = (step) => {
 		try {
 			fetch(`http://localhost:3001/api/v1/step`, {
 				method: "POST",
-		    headers: {
-		      'Content-Type': 'application/json'
-		    },
+		    headers: headers(),
 		    body: JSON.stringify({
 		    	step: {
 		    		metric: step.metric,
@@ -25,9 +23,9 @@ export const addStep = (step) => {
 						completed: goalCompleted
 					}
 					return dispatch(editGoal(goal))
+				} else {
+					//handle error/redirect here
 				}
-				const msgType = rj.ok ? "success" : "failure"
-				return dispatch(statusMessage(rj.message, msgType))
 			})
 			.catch(err => {
 				console.log("From post step then.catch: ", err)
@@ -45,9 +43,7 @@ export const editStep = (step) => {
 		try {
 			fetch(`http://localhost:3001/api/v1/step/${step.id}`, {
 				method: "PATCH",
-		    headers: {
-		      'Content-Type': 'application/json'
-		    },
+		    headers: headers(),
 		    body: JSON.stringify({
 		    	id: step.id,
 		    	step: {
@@ -67,9 +63,9 @@ export const editStep = (step) => {
 						completed: goalCompleted
 					}
 					return dispatch(editGoal(goal))
+				} else {
+					//handle error/redirect here
 				}
-				const msgType = rj.ok ? "success" : "failure"
-				return dispatch(statusMessage(rj.message, msgType))
 			})
 			.catch(err => {
 				console.log("From post step then.catch: ", err)
@@ -87,9 +83,7 @@ export const deleteStep = (stepId) => {
 		try {
 			fetch(`http://localhost:3001/api/v1/step/${stepId}`, {
 				method: "DELETE",
-		    headers: {
-		      'Content-Type': 'application/json'
-		    }
+		    headers: headers()
 			})
 			.then(r => r.json())
 			.then(rj => {
@@ -101,9 +95,9 @@ export const deleteStep = (stepId) => {
 						completed: goalCompleted
 					}
 					return dispatch(editGoal(goal))
+				} else {
+					//handle error/redirect here
 				}
-				const msgType = rj.ok ? "success" : "failure"
-				return dispatch(statusMessage(rj.message, msgType))
 			})
 			.catch(err => {
 				console.log("From post step then.catch: ", err)
@@ -114,4 +108,14 @@ export const deleteStep = (stepId) => {
 			return dispatch(statusMessage(err, "failure"))
 		}
 	}
+}
+
+const headers = () => {
+	const h = {
+    "Accept": "application/json",
+		"Content-Type": "application/json",
+		"Access-Control-Expose-Headers": "Authorization"
+	}
+	const token = localStorage.getItem('priorityzeIdToken')
+	return token ? {...h, "Authorization": token.token} : h
 }

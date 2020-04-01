@@ -1,43 +1,21 @@
 export const signUp = (user) => {
 	return dispatch => {
+		dispatch(beginRequest())
 		try {
 			fetch(`${baseURL}signup`, {
 				method: "POST",
 		    headers: headers(),
 		    body: JSON.stringify(user)
 			})
-			.then(r => {
-				const token = r.headers.get(["authorization"])
-				if(token) {
-					localStorage.setItem('priorityzeIdToken', token)
-				} else {
-					console.log(r.message)
-					return dispatch(addCurrentuser({ user: null }))
-				}
-			})
-			.catch(err => {
-				console.log("From then.catch: ", err)
-				// return dispatch(statusMessage(err.message, "failure"))
-			})
-		}
-		catch(err) {
-			console.log("try-catch error: ", err)
-			// return dispatch(statusMessage(err.message, "failure"))
-		}
-	}
-}
-
-export const getCurrentUser = (token) => {
-	return dispatch => {
-		try {
-			console.log("action user, token: ", token)
-			fetch(`${baseURL}user`, {
-				headers: headers(token)
-			})
-			.then(r => r.json())
-			.then(rj => {
-				console.log("actions user, getCurrentUser, rj: ", rj)
-				localStorage.setItem('priorityzeCurrentUser', rj.user)
+			.then(r => r.json().then(rj => ({ rj, r })))
+			.then(({ rj, r }) => {
+				dispatch(finishRequest())
+				console.log("actions, login, r", r)
+				console.log("actions, login, rj", rj)
+				if(!r.ok) return dispatch(responseError("That username or email already exists."));
+				localStorage.setItem('priorityzeIdToken', r.headers.get(["Authorization"]))
+				localStorage.setItem('priorityzeCurrentUserId', rj.id)
+				dispatch(isAuthorized(true))
 			})
 			.catch(err => {
 				console.log("From then.catch: ", err)
@@ -53,29 +31,30 @@ export const getCurrentUser = (token) => {
 
 export const logIn = (user) => {
 	return dispatch => {
-		dispatch(addCurrentuser(user))
+		dispatch(beginRequest())
 		try {
 			fetch(`${baseURL}login`, {
 				method: "POST",
 		    headers: headers(),
 		    body: JSON.stringify(user)
 			})
-			.then(r => {
-				const token = r.headers.get(["authorization"])
-				if(token) {
-					localStorage.setItem('priorityzeIdToken', token)
-					console.log("localStorage token: ", localStorage.getItem('priorityzeIdToken'))
-				} else {
-					console.log(r.message)
-					return dispatch(addCurrentuser({ user: null }))
-				}
+			.then(r => r.json().then(rj => ({ rj, r })))
+			.then(({ rj, r }) => {
+				dispatch(finishRequest())
+				console.log("actions, login, r", r)
+				console.log("actions, login, rj", rj.id)
+				if(!r.ok) return dispatch(responseError(rj.error));
+				localStorage.setItem('priorityzeIdToken', r.headers.get(["Authorization"]))
+				localStorage.setItem('priorityzeCurrentUserId', rj.id)
 			})
 			.catch(err => {
 				console.log("From then.catch: ", err)
+				dispatch(finishRequest())
 				// return dispatch(statusMessage(err.message, "failure"))
 			})
 		}
 		catch(err) {
+			dispatch(finishRequest())
 			console.log("try-catch error: ", err)
 			// return dispatch(statusMessage(err.message, "failure"))
 		}
@@ -91,10 +70,10 @@ export const logOut = () => {
 			})
 			.then(r => r.json())
 			.then(rj => {
-				console.log("logged out: ", rj)
-				localStorage.removeItem('priorityzeIdToken')
-				localStorage.removeItem('priorityzeCurrentUser')
-				return dispatch(logoutUser())
+				if(rj.ok) {
+					localStorage.removeItem('priorityzeIdToken')
+					localStorage.removeItem('priorityzeCurrentUserId')
+				}
 			})
 			.catch(err => {
 				console.log("From then.catch: ", err)
@@ -108,11 +87,15 @@ export const logOut = () => {
 	}
 }
 
-const addCurrentuser = user => ({ type: "ADD_CURRENT_USER", user })
+export const responseError = errorMessage => ({ type: "RESPONSE_ERROR", errorMessage })
 
-const addSessionToken = token => ({ type: "ADD_SESSION_TOKEN", token })
+const beginRequest = () => ({ type: "BEGIN_REQUEST" })
 
-const logoutUser = () => ({ type: "LOGOUT_USER" })
+const finishRequest = () => ({ type: "FINISH_REQUEST" })
+
+const isAuthorized = (authorized) => ({ type: "IS_AUTHORIZED", authorized })
+
+// const isVerified = (verified) => ({ type: "IS_VERIFIED", verified })
 
 const headers = (token = null) => {
 	const h = {
@@ -124,3 +107,8 @@ const headers = (token = null) => {
 }
 
 const baseURL = "http://localhost:3001/"
+
+
+
+
+

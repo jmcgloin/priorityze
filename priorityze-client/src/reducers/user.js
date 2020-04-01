@@ -1,19 +1,26 @@
-const user = (state = { currentUser: null, token: null }, action) => {
+// Do I need any of this anymore???????
+const user = (state = { authorized: false, errorMessage: "", requestPending: false }, action) => {
+	const { authorized, errorMessage, requestPending } = action
 	switch(action.type) {
-		case "ADD_CURRENT_USER":
+		case "IS_AUTHORIZED":
 			return {
 				...state,
-				currentUser: action.user
+				authorized
 			}
-		case "ADD_SESSION_TOKEN":
+		case "RESPONSE_ERROR":
 			return {
-					...state,
-					token: action.token
+				...state,
+				errorMessage
 			}
-		case "LOGOUT_USER":
+		case "BEGIN_REQUEST":
 			return {
-				currentUser: null,
-				token: null
+				...state,
+				requestPending
+			}
+		case "FINISH_REQUEST":
+			return {
+				...state,
+				requestPending
 			}
 		default:
 			return state

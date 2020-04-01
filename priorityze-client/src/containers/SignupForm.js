@@ -1,7 +1,8 @@
 import  React, {Component} from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { signUp } from '../actions/user';
+import { signUp, responseError } from '../actions/user';
 
 class SignupForm extends Component {
 	state = ({
@@ -11,6 +12,7 @@ class SignupForm extends Component {
 			password: ""//,
 			// passwordConfirmation: ""
 		},
+		errorMessage: this.props.user.errorMessage,
 		matching: false
 	})
 	onChange = ({ target }) => {
@@ -24,16 +26,25 @@ class SignupForm extends Component {
 	signUp = (event) => {
 		event.preventDefault();
 		this.props.signUp({ user: this.state.user })
+		this.setState({
+			user: {
+				username: "",
+				email: "",
+				password: ""
+			}
+		})
 	}
 	componentDidUpdate = () => {
-		if(this.props.user.token) this.props.history.push("/user")
+		if(this.props.user.errorMessage) setTimeout(() => this.props.responseError(""), 3000)
 	}
 	render() {
 		const { username, email, password /*, passwordConfirmation} */ } = this.state.user
+		const { errorMessage } = this.props.user
 		return (
+			localStorage.getItem('priorityzeIdToken') ? <Redirect to="/user" /> : (
 			<div className="flex flex-column flex-around">
 				<div className="messages">
-					{this.props.message}
+					 {errorMessage} {/*make this vanish and click-to-close-able*/}
 				</div>
 				<form onSubmit={ this.signUp }>
 					<label>Username: <input
@@ -42,6 +53,7 @@ class SignupForm extends Component {
 						onChange={ this.onChange }
 						name="username"
 						required
+						autoFocus
 					/></label>
 					<label>Email: <input
 						type="email"
@@ -67,8 +79,15 @@ class SignupForm extends Component {
 					<button type="submit">Sign Up!</button>
 				</form>
 			</div>
+			)
 		)
 	}
 }
 
-export default connect(({ user }) => ({ user }), { signUp })(SignupForm)
+// const mapDispatchtoProps = dispatch => {
+// 	return {
+// 		signUp: 
+// 	}
+// }
+
+export default connect(({ user }) => ({ user }), { signUp, responseError })(SignupForm)

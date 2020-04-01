@@ -23,6 +23,7 @@ class StepList extends Component {
 			<StepForm
 				addStep={ this.props.addStep }
 				goalId={ this.props.goalId }
+				key="stepForm"
 			/>
 		)
 	}
@@ -32,7 +33,9 @@ class StepList extends Component {
 	render() {
 		return (
 			<div className="flex flex-row flex-start">
-	 			{ this.state.extended && this.renderSteps() }
+				<div className="flex flex-column">
+		 			{ this.state.extended && this.renderSteps() }
+				</div>
 	 			<div className="menu-extend flex flex-column flex-center" onClick={ this.clickMenu }>
 	 				{ this.state.extended ? "<" : ">" }
 	 			</div>

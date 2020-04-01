@@ -1,17 +1,22 @@
-import React from 'react';
+import  React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import LogOutButton from '../components/LogOutButton';
 import { logOut } from '../actions/user';
 
-const Header = (props) => {
-	const handleLogOut = () => {
-		if(!props.user.currentUser) props.history.push("/")
-		props.logOut()
-		console.log("header after  logout currentUser:",props.user.currentUser)
+class Header extends Component {
+	render() {
+		return (
+			<div className="flex flex-between flex-row">
+				<Link to="/">Home</Link> {/*how to change this based on page/component*/}
+				{ localStorage.getItem('priorityzeIdToken') ? 
+					<LogOutButton logOut={ this.props.logOut } history={this.props.history} /> :
+					null
+				}
+			</div>
+		)
 	}
-	return (
-		props.user.currentUser ? <button type="button" onClick={ handleLogOut } >Log Out</button> : null
-	)
 }
 
-export default connect(({ user }) => ({ user }), { logOut })(Header)
+export default connect(null, ({ logOut }))(Header)

@@ -15,6 +15,7 @@ const GoalList = (props) => {
 		const addCard = <Card
 				goal={{ title: "+" }}
 				key="addCard"
+				id="addCard"
 			/>
 		return goalsArray.concat(addCard)
 	}
