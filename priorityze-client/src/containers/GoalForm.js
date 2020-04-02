@@ -1,8 +1,8 @@
 import  React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import Picker from 'emoji-picker-react';
-// import DatePicker from 'react-date-picker';
-// import moment from 'moment';
+import DatePicker from 'react-date-picker';
+import moment from 'moment';
 
 import { addGoal, editGoal, deleteGoal } from '../actions/goal';
 
@@ -23,12 +23,12 @@ class GoalForm extends Component {
 	}
 	dateChange = (date) => {
 		console.log(date)
-		// this.setState({
-		// 	goal: {
-		// 		...this.state.goal,
-		// 		deadline: date
-		// 	}
-		// })
+		this.setState({
+			goal: {
+				...this.state.goal,
+				deadline: date
+			}
+		})
 	}
 	handleSubmit = (event) => {
 		event.preventDefault()
@@ -44,7 +44,7 @@ class GoalForm extends Component {
 	}
 	render() {
 		const { title, deadline, importance, icon, id } = this.state.goal
-		console.log("GoalForm, render, deadline: ", new Date(deadline))
+		console.log("GoalForm, render, deadline: ", moment(deadline).format("MM-DD-YYYY"))
 		return (
 			<form className="flex flex-column flex-around flex-center" onSubmit={ this.handleSubmit } >
 				<input
@@ -56,12 +56,13 @@ class GoalForm extends Component {
 					required
 				/>
 				{/*<DatePicker
-              value={ deadline }
-              onChange={ this.dateChange }
-            />*/}
+					value={ moment(deadline).format("YYYY-MM-DD") }
+	        
+	        dateFormat="YYYY-MM-DD"
+	      />*/}
 				<input
 					type="date"
-					value={ new Date(deadline) }
+					value={ moment(deadline).format("YYYY-MM-DD") }
 					name="deadline"
 					onChange={ (event) => this.handleChange(event) }
 					required

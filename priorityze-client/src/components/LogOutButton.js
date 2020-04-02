@@ -6,7 +6,7 @@ const LogOutButton = (props) => {
 		props.logOut()
 	}
 	return (
-		<button type="button" onClick={ logOut } >Log Out</button>
+		<button className="button rounded medium-button" type="button" onClick={ logOut } >Log Out</button>
 	)
 }
 

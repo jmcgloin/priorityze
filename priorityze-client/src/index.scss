@@ -90,9 +90,7 @@
 
 header, footer {
 	height: 10vh;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+	width: 100%;
 }
 
 header {
@@ -196,6 +194,21 @@ textarea {
 	border-radius: 50%;
 }
 
+.medium-button {
+	padding: 8px;
+	margin: 3vw 1vw;
+	min-width: 20px;
+	min-height: 30px;
+	height: 2em;
+	width: 5em;
+	font-size: 1rem;
+	line-height: .75rem;
+}
+
 .hidden {
 	display: none;
+}
+
+.wid-95 {
+	width: 95%;
 }
