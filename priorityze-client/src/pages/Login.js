@@ -4,7 +4,9 @@ import LoginForm from '../containers/LoginForm'
 
 const Login = (props) => {
 	return (
-		<LoginForm history={props.history} message={ props.message } />
+		<div className="flex flex-column flex-vcenter flex-between full-height">
+			<LoginForm history={props.history} message={ props.message } />
+		</div>
 	)
 }
 

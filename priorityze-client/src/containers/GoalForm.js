@@ -21,8 +21,9 @@ class GoalForm extends Component {
 			}
 		})
 	}
-	dateChange = (date) => {
-		console.log(date)
+	dateChange = ({ target }) => {
+		console.log(moment(target.value).utc().format("YYYY-MM-DD"))
+		const date = moment(target.value).utc().format("YYYY-MM-DD")
 		this.setState({
 			goal: {
 				...this.state.goal,
@@ -62,9 +63,9 @@ class GoalForm extends Component {
 	      />*/}
 				<input
 					type="date"
-					value={ moment(deadline).format("YYYY-MM-DD") }
+					value={ moment(deadline).local().format("YYYY-MM-DD") }
 					name="deadline"
-					onChange={ (event) => this.handleChange(event) }
+					onChange={ (event) => this.dateChange(event) }
 					required
 				/>
 				<input

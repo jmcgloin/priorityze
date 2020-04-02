@@ -42,12 +42,12 @@ class SignupForm extends Component {
 		const { errorMessage } = this.props.user
 		return (
 			localStorage.getItem('priorityzeIdToken') ? <Redirect to="/user" /> : (
-			<div className="flex flex-column flex-around">
+			<div className="flex flex-column flex-around full-height">
 				<div className="messages">
 					 {errorMessage} {/*make this vanish and click-to-close-able*/}
 				</div>
-				<form onSubmit={ this.signUp }>
-					<label>Username: <input
+				<form onSubmit={ this.signUp } className="auth-form">
+					<label><p>Username: </p><input
 						type="text"
 						value={ username }
 						onChange={ this.onChange }
@@ -55,14 +55,14 @@ class SignupForm extends Component {
 						required
 						autoFocus
 					/></label>
-					<label>Email: <input
+					<label><p>Email: </p><input
 						type="email"
 						value={ email }
 						onChange={ this.onChange }
 						name="email"
 						required
 					/></label>
-					<label>Password: <input
+					<label><p>Password: </p><input
 						type="password"
 						value={ password }
 						onChange={ this.onChange }

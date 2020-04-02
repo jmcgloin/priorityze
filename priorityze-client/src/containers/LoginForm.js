@@ -39,19 +39,19 @@ class LoginForm extends Component {
 		const { email, password } = this.state.user
 		const { errorMessage } = this.props.user
 		return (
-			<div className="flex flex-column flex-around">
+			<div className="flex flex-column flex-around full-height">
 				<div className="messages">
 					 {errorMessage}
 				</div>
-				<form onSubmit={ this.logIn }>
-					<label>Email: <input
+				<form onSubmit={ this.logIn } className="auth-form" >
+					<label><p>Email: </p><input
 						type="email"
 						value={ email }
 						onChange={ this.onChange }
 						name="email"
 						required
 					/></label>
-					<label>Password: <input
+					<label><p>Password: </p><input
 						type="password"
 						value={ password }
 						onChange={ this.onChange }
