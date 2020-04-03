@@ -1,7 +1,7 @@
-import  React, { Component, useState } from 'react';
+import  React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Picker from 'emoji-picker-react';
-import DatePicker from 'react-date-picker';
+// import Picker from 'emoji-picker-react';
+// import DatePicker from 'react-date-picker';
 import moment from 'moment';
 
 import { addGoal, editGoal, deleteGoal } from '../actions/goal';
@@ -37,6 +37,7 @@ class GoalForm extends Component {
 			...this.state.goal,
 			user_id: this.props.userId
 		}
+		console.log(goal)
 		goal.id ? this.props.editGoal(goal) : this.props.addGoal(goal)
 		this.props.handleCancel()
 	}
@@ -44,7 +45,7 @@ class GoalForm extends Component {
 		console.log(e)
 	}
 	render() {
-		const { title, deadline, importance, icon, id } = this.state.goal
+		const { title, deadline, importance, id } = this.state.goal
 		console.log("GoalForm, render, deadline: ", moment(deadline).format("MM-DD-YYYY"))
 		return (
 			<form className="flex flex-column flex-around flex-center" onSubmit={ this.handleSubmit } >
@@ -77,13 +78,13 @@ class GoalForm extends Component {
 					required
 				/>
 				{/*<Picker onEmojiClick={ this.handleEmoji }/>*/}
-				<input
+				{/*<input
 					type="text"
 					value={ icon }
 					name="icon"
-					placeholder={ icon || "Choose an icon" /*how to do this one? dialog? dropdown? */}
+					placeholder={ icon || "Choose an icon" /*how to do this one? dialog? dropdown? 
 					onChange={ this.handleChange }
-				/>
+				/>*/}
 				<div className="buttons flex flex-row flex-around">
 					<button type="submit">{ id ? "Update" : "Add" }</button>
 					<button type="button" onClick={ this.props.handleCancel } >Cancel</button>

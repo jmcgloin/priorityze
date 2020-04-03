@@ -1,5 +1,9 @@
 @import-normalize;
 
+body {
+	background: linear-gradient(to right, #eae7e2, #666b61);
+}
+
 .main-content {
 	display: flex;
 	flex-direction: column;
@@ -27,7 +31,6 @@
 }
 
 .step-list {
-
 	span {
 		margin-right: 4px;
 	}
@@ -61,18 +64,23 @@
 	input {
 		// width: 90%;
 		border: none;
-		border-bottom: 1px solid red;
+		border-bottom: 1px solid black;
+		padding-left: 10px;
 	}
 	.buttons > button {
+		margin-top: 2px;
 		height: 1rem;
 		line-height: .7rem;
 		// width: 40%;
 		text-align: center;
 		font-size: .7rem;
-		padding: 0;
+		padding: 2px;
+		border: 1px solid black;
+		border-radius: 10px;
+		background: none;
 	}
 	form > input {
-		color: #777;
+		color: black;
 	}
 }
 .goal-card.completed {
@@ -93,6 +101,12 @@
 		margin-left: 5px;
 	}
 	margin-bottom: 3px;
+}
+
+button {
+	border: 1px solid black;
+	border-radius: 10px;
+	background: none;
 }
 
 header, footer {
@@ -181,12 +195,12 @@ textarea {
 
 .big-button {
 	padding: 8px;
-	margin: 3vw 1vw;
 	min-width: 50px;
 	min-height: 80px;
 	height: 15vh;
 	width: 15vw;
 	font-size: 2.5vw;
+	cursor: pointer;
 }
 
 .dialog-button {
@@ -220,6 +234,13 @@ textarea {
 	width: 95%;
 }
 
+.welcome-buttons {
+	a {
+		
+	margin: 3vw 1vw;
+	}
+}
+
 .auth-form {
 	height: 100%;
 	display: flex;
@@ -243,17 +264,17 @@ textarea {
 			line-height: 3.5vw;
 			height: 2rem;
 			width: 25vw;
-			background-color: transparent;
-			box-shadow: none;
-			border: 2px solid black;
-			border-radius: 10px;
 		}
 	}
 	button {
 		width: 50%;
 		height: 5%;
-		border: 2px solid black;
-		border-radius: 10px;
-		background: none;
 	}
+}
+
+input {
+	background-color: transparent;
+	box-shadow: none;
+	border: 2px solid black;
+	border-radius: 10px;
 }

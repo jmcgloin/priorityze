@@ -1,4 +1,5 @@
 import  React, {Component} from 'react';
+import moment from 'moment';
 
 import GoalForm from './GoalForm';
 
@@ -15,7 +16,8 @@ export default class GoalCard extends Component {
 	}
 	render() {
 		const { id, goal } = this.props
-		const newGoal = { ...goal, title: "" }
+		const newGoal = { ...goal, title: "", deadline: moment().utc().format("YYYY-MM-DD")  }
+		console.log("GoalCard, render, goal and id, new goal", goal, id, newGoal )
 		return (
 			<div
 				className={
@@ -26,7 +28,7 @@ export default class GoalCard extends Component {
 			>
 				{ this.state.editing ? 
 					<GoalForm
-						goal={ id === "addCard" ? newGoal : goal }
+						goal={ !id ? newGoal : goal }
 						id={ id }
 						handleCancel={ this.handleCancelEdit }
 					/> : <p>{ goal.title }</p>
