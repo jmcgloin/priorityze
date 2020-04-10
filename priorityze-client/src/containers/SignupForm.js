@@ -69,13 +69,6 @@ class SignupForm extends Component {
 						name="password"
 						required
 					/></label>
-					{/*<label>Confirm password: <input
-						className={ this.state.matching ? "matches" : null }
-						type="password"
-						value={ passwordConfirmation }
-						onChange={ this.onChange }
-						name="passwordConfirmation"
-					/></label>*/}
 					<button type="submit">Sign Up!</button>
 				</form>
 			</div>

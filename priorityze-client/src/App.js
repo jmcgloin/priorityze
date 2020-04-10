@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import User from './pages/User';
 import Welcome from './pages/Welcome';
 import Header from './containers/Header';
+import WelcomeHeader from './containers/WelcomeHeader';
 import AuthRoute from './components/AuthRoute'
 
 
@@ -14,7 +15,10 @@ function App() {
   return (
     <div className="main-content">
     	<Router>
-    		<Route path="/" component={ Header } />
+        <Switch>
+      		<Route exact path="/" component={ WelcomeHeader } />
+          <Route path="/" component={ Header } />
+        </Switch>
     		<Switch>
   	  		<Route exact path="/" component={ Welcome } />
   				<Route path="/login" component={ Login } />

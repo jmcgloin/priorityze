@@ -1,5 +1,8 @@
 @import-normalize;
 
+$text-color: black;
+$text-shadow: white;
+
 body {
 	background: linear-gradient(to right, #eae7e2, #666b61);
 }
@@ -13,9 +16,31 @@ body {
   background-size: 100vw 100vh;
 }
 
-.app-title {
-	font-size: 4rem;
+.welcome-content {
+		filter: drop-shadow(0 0 2px $text-shadow);
+		color: $text-color;
+	.app-title {
+		h1 {
+			font-size: 4rem;
+			margin-bottom: 0;
+		}
+		h2 {
+			font-size: 2.5rem;
+		  
+		}
+	}
+	.welcome-buttons {
+		a {
+			margin: 3vw 1vw;
+			button {
+				filter: drop-shadow(0 0 1px $text-shadow);
+				color: $text-color;
+				border-color: $text-color;
+			}
+		}
+	}
 }
+
 
 .card {
 	margin: 5px 5px 0 0;
