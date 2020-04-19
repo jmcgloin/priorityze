@@ -10,8 +10,6 @@ export const signUp = (user) => {
 			.then(r => r.json().then(rj => ({ rj, r })))
 			.then(({ rj, r }) => {
 				dispatch(finishRequest())
-				console.log("actions, login, r", r)
-				console.log("actions, login, rj", rj)
 				if(!r.ok) return dispatch(responseError("That username or email already exists."));
 				localStorage.setItem('priorityzeIdToken', r.headers.get(["Authorization"]))
 				localStorage.setItem('priorityzeCurrentUserId', rj.id)

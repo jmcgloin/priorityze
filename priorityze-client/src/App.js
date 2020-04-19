@@ -8,7 +8,8 @@ import User from './pages/User';
 import Welcome from './pages/Welcome';
 import Header from './containers/Header';
 import WelcomeHeader from './containers/WelcomeHeader';
-import AuthRoute from './components/AuthRoute'
+import AuthRoute from './components/AuthRoute';
+import Next from './pages/Next';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   	  		<Route exact path="/" component={ Welcome } />
   				<Route path="/login" component={ Login } />
   				<Route path="/signup" component={ Signup } />
+          <AuthRoute path="/next" component={ Next } />
           <AuthRoute path="/user" component={ User } />
           <Route component={() =>  "404 Not Found" } />
   			</Switch>

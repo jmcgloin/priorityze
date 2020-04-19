@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 		namespace :v1 do
 			resources :goal, only: [:index, :create, :destroy, :update]
 			resources :step, only: [:index, :create, :update, :destroy]
+			get "next", to: "goal#next"
 		end
 	end
 	root to: "home#index"

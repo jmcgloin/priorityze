@@ -21,6 +21,24 @@ export const fetchGoals = () => {
 	}
 }
 
+export const fetchNextStep = () => {
+	return dispatch => {
+		try {
+			fetchGoals("http://localhost:3001/api/v1/next", {
+				headers: headers()
+			})
+			.then(r => r.json().then(rj => ({ rj, r })))
+			.then(({ rj, r }) => {
+				if(!r.ok) console.log(r);
+				console.log(rj)
+			})
+		}
+		catch(err) {
+			console.log(err)
+		}
+	}
+}
+
 export const addGoal = (goal) => {
 	const user_id = localStorage.getItem('priorityzeCurrentUserId')
 	const fullGoal = {
@@ -113,6 +131,8 @@ export const removeDeletedGoal = (goalId) => ({ type: "REMOVE_DELETED_GOAL", goa
 export const updateEditedGoal = (goal) => ({ type: "UPDATE_EDITED_GOAL", goal })
 
 export const statusMessage = (msg, msgType) => ({ type: "STATUS_MESSAGE", msg, msgType })
+
+export const nextStep = (step) => ({ type: "NEXT_STEP", step })
 
 const headers = () => {
 	const h = {

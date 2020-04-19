@@ -42,6 +42,21 @@ class Api::V1::GoalController < ApplicationController
 		end
 	end
 
+	def next
+		goals = current_user.goals.most_important.due_soonest
+		binding.pry
+		if goals.length == 1
+			render json: { goal: goals[0] }
+		elsif goals.length > 1
+			goal = goals.reduce({}) do |max, goal|
+				max = max.steps.length > goal.steps.length ? max : goal
+			end
+			render json: { goal: goal }
+		else
+			render json: { goal: false }
+		end
+	end
+
 	private
 
 	def goal_params

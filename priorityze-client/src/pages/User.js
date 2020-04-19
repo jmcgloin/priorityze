@@ -45,6 +45,7 @@ class User extends Component {
 						value="deadline"
 					>Due Soonest</button>
 				</div>
+					{ this.props.goals.length > 0 ? null : (<h1>You currently have no goals.  First goal: create one. Click the "+" below.</h1>) }
 				<GoalList
 					goals={ this.props.goals }
 					sortMethod={ this.state.sortMethod }
