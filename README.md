@@ -2,7 +2,7 @@
 
 Priorityze
 
-[![Priorityze](http://img.youtube.com/vi/NfvY0KuZBMU/0.jpg)](https://youtu.be/NfvY0KuZBMU)
+[![Priorityze](http://img.youtube.com/vi/SVFWMP_gmdM/0.jpg)](https://youtu.be/SVFWMP_gmdM)
 
 ## Getting Started
 
