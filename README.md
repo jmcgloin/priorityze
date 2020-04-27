@@ -2,6 +2,8 @@
 
 Priorityze
 
+[![IMAGE ALT TEXT HERE](https://youtu.be/NfvY0KuZBMU0.jpg)](https://youtu.be/NfvY0KuZBMU)
+
 ## Getting Started
 
 Clone and install gems:
