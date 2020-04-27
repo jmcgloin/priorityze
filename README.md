@@ -1,6 +1,4 @@
-# Project Title
-
-Priorityze
+# Priorityze
 
 [![Priorityze](http://img.youtube.com/vi/SVFWMP_gmdM/0.jpg)](https://youtu.be/SVFWMP_gmdM)
 
